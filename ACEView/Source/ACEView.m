@@ -24,25 +24,18 @@ NSString *const ACETextDidEndEditingNotification = @"ACETextDidEndEditingNotific
 static NSArray *allowedSelectorNamesForJavaScript;
 
 @interface ACEView()
-
 - (NSString *) stringByEvaluatingJavaScriptOnMainThreadFromString:(NSString *)script;
 - (void) executeScriptsWhenLoaded:(NSArray *)scripts;
 - (void) executeScriptWhenLoaded:(NSString *)script;
-
 - (void) resizeWebView;
-
 - (void) showFindInterface;
 - (void) showReplaceInterface;
-
-+ (NSArray *) allowedSelectorNamesForJavaScript;
-
++ (NSArray*) allowedSelectorNamesForJavaScript;
 - (void) aceTextDidChange;
-
 @end
 
 #pragma mark - ACEView implementation
 @implementation ACEView
-
 @synthesize firstSelectedRange, delegate;
 
 #pragma mark - Internal
@@ -58,7 +51,7 @@ static NSArray *allowedSelectorNamesForJavaScript;
     return self;
 }
 
-- (void) awakeFromNib {
+- (void) viewDidMoveToWindow {
     [self addSubview:webView];
     [self setBorderType:NSBezelBorder];
 
@@ -79,8 +72,8 @@ static NSArray *allowedSelectorNamesForJavaScript;
     NSString *htmlPath = [bundle pathForResource:@"index" ofType:@"html"];
     NSString *html = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
 	html = [html stringByReplacingOccurrencesOfString:ACE_JAVASCRIPT_DIRECTORY withString:javascriptDirectory];
-
-    [[webView mainFrame] loadHTMLString:html baseURL:[bundle bundleURL]];
+	[[webView mainFrame] loadHTMLString:html baseURL:[bundle bundleURL]];
+	[self awakeFromNib];
 }
 + (BOOL) isSelectorExcludedFromWebScript:(SEL)aSelector {
     return ![[ACEView allowedSelectorNamesForJavaScript] containsObject:NSStringFromSelector(aSelector)];
