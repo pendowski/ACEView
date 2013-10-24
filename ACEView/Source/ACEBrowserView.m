@@ -2,6 +2,7 @@
 #import "ACEBrowserView.h"
 #import "ACEModeNames.h"
 #import "ACEThemeNames.h"
+#import <objc/message.h>
 
 typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 - (NSControlActionBlock) actionBlock;
@@ -13,9 +14,9 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 
 @implementation NSControl (Block)
 
-- (void) trampoline {
+- (void) trampoline { 
 	if (self.actionBlock && self.target == self) self.actionBlock(self);
-	else if (self.action && self.target) [self.target performSelector:self.action withObject:self];
+	else if (self.action && self.target) objc_msgSend (self.target,self.action,self);
 }
 - (NSControlActionBlock) actionBlock { return  objc_getAssociatedObject(self, _cmd); }
 

@@ -6,8 +6,11 @@
 //  Copyright (c) 2012 Code of Interest. All rights reserved.
 //
 
+
 #import "ACEModeNames.h"
 
+
+/*
 NSString *const _ACEModeNames[ACEModeCount] = {
     [ACEModeASCIIDoc]			 = @"asciidoc",
     [ACEModeC9Search]			 = @"c9search",
@@ -105,6 +108,7 @@ NSString *const _ACEModeNamesHuman[ACEModeCount] = {
     [ACEModeXQuery]				 = @"XQuery",
     [ACEModeYAML]				 = @"YAML"
 };
+*/
 
 @implementation ACEModeNames
 
