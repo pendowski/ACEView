@@ -26,7 +26,7 @@
 @property NSSplitView *split;
 
 @property 	 NSButton 	*reloadB, *alertB, *modeB, *themeB;
-@property 	 NSPopover *modePop, *themePop;
+@property 	(nonatomic) NSPopover *modePop, *themePop;
 
 @property 	  ACEView 		*aceView;
 @property (nonatomic) float progress;

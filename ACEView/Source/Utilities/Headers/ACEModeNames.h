@@ -7,6 +7,9 @@
 //
 #import <ACEView/ACEModes.h>
 
+NSString *const _ACEModeNames[ACEModeCount];
+NSString *const _ACEModeNamesHuman[ACEModeCount];
+
 /** Class providing methods to:
 
  - convert ACE mode names used internally to to their human-readable counterparts and vise-versa.

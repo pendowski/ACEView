@@ -65,7 +65,9 @@ static NSArray *allowedSelectorNamesForJavaScript;
 
     // Unable to use pretty resource paths with CocoaPods
 	//	NSString *javascriptDirectory = [[bundle pathForResource:@"ace" ofType:@"js" inDirectory:@"ace/javascript"] stringByDeletingLastPathComponent];
-    NSString *javascriptDirectory = [[bundle pathForResource:@"ace" ofType:@"js"] stringByDeletingLastPathComponent];
+    NSString *javascriptDirectory = [[bundle resourcePath]stringByAppendingPathComponent:@"src"];
+	 //:@"ace" ofType:@"js"] stringByDeletingLastPathComponent];
+
 
 	// Unable to use pretty resource paths with CocoaPods
 	//	NSString *htmlPath = [bundle pathForResource:@"index" ofType:@"html" inDirectory:@"ace"];

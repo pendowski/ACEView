@@ -1,6 +1,6 @@
-[submodule "ACEView/Dependencies/ace"]
-	path = ACEView/Dependencies/ace
-	url = https://github.com/ajaxorg/ace-builds.git
 [submodule "KFURLBar"]
 	path = KFURLBar
 	url = https://github.com/mralexgray/KFURLBar.git
+[submodule "ACEView/Dependencies/ace"]
+	path = ACEView/Dependencies/ace
+	url = https://github.com/ajaxorg/ace
