@@ -40,7 +40,7 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 @implementation ACEBrowserView
 
 //-   (id) valueForUndefinedKey:(NSString*)key 	{ return  [_webView valueForKey:key];	}
-- (void) setHTMLString:(NSString*)HTMLString 	{ [self.aceView setString:HTMLString]; }
+- (void) setHTMLString:(NSString*)HTMLString 	{ [self.aceView setStringValue:HTMLString]; }
 - (void) setUrlBarHeight:(CGFloat)urlBarHeight 	{ _urlBarHeight = urlBarHeight;
 
 	NSRect urlBox = (NSRect){ 0, self.bounds.size.height - _urlBarHeight, self.bounds.size.width, _urlBarHeight};
@@ -86,7 +86,7 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 	_webView.autoresizingMask 	= 
 	_aceView.autoresizingMask 	= NSViewWidthSizable|NSViewHeightSizable;
 	[_urlBar bind:@"addressString" toObject:_webView withKeyPath:@"mainFrameURL" options:nil];
-	[_webView bind:@"mainFrameURL" toObject:_aceView withKeyPath:@"mainFrameURL" options:nil];
+//	[_webView bind:@"mainFrameURL" toObject:_aceView withKeyPath:@"mainFrameURL" options:nil];
 	_aceView.delegate 			= self; 
 
 	[self addSubview:_split];
@@ -96,7 +96,7 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 	_aceView.showInvisibles		= YES;
 	
 
-	_aceView.string 	= [NSString stringWithContentsOfFile:@"/Volumes/2T/ServiceData/git/ACEView/ACEView/Source/Headers/ACEView.h" 
+	_aceView.stringValue 	= [NSString stringWithContentsOfFile:@"/Volumes/2T/ServiceData/git/ACEView/ACEView/Source/Headers/ACEView.h" 
 																 encoding:NSUTF8StringEncoding error:nil];
 
 	//ACEModeNames.humanModeNames ACEThemeNames.humanThemeNames
