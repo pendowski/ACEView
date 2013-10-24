@@ -1,7 +1,7 @@
-// NSString *htmlFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"HTML5" ofType:@"html"];   NSString *html = [NSString stringWithContentsOfFile:htmlFilePath encoding:NSUTF8StringEncoding error:nil];
-//    [aceView setString:[NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://github.com/faceleg/ACEView"] encoding:NSUTF8StringEncoding
-//                                                   error:nil]];
 
+#import "ACEBrowserView.h"
+#import "ACEModeNames.h"
+#import "ACEThemeNames.h"
 
 typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 - (NSControlActionBlock) actionBlock;
@@ -27,9 +27,6 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 @end
 
 
-#import "ACEBrowserView.h"
-#import "ACEModeNames.h"
-#import "ACEThemeNames.h"
 
 @interface  		    ACEBrowserView( )
 - (void) showAlert:(id)sender;
@@ -274,3 +271,7 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 }
 
 @end
+
+// NSString *htmlFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"HTML5" ofType:@"html"];   NSString *html = [NSString stringWithContentsOfFile:htmlFilePath encoding:NSUTF8StringEncoding error:nil];
+//    [aceView setString:[NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://github.com/faceleg/ACEView"] encoding:NSUTF8StringEncoding
+//                                                   error:nil]];

@@ -73,7 +73,7 @@ static NSArray *allowedSelectorNamesForJavaScript;
     NSString *html = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
 	html = [html stringByReplacingOccurrencesOfString:ACE_JAVASCRIPT_DIRECTORY withString:javascriptDirectory];
 	[[webView mainFrame] loadHTMLString:html baseURL:[bundle bundleURL]];
-	[self awakeFromNib];
+
 }
 + (BOOL) isSelectorExcludedFromWebScript:(SEL)aSelector {
     return ![[ACEView allowedSelectorNamesForJavaScript] containsObject:NSStringFromSelector(aSelector)];
@@ -130,10 +130,7 @@ static NSArray *allowedSelectorNamesForJavaScript;
     return contentString;
 }
 - (void) executeScriptsWhenLoaded:(NSArray *)scripts {
-    if ([webView isLoading]) {
-        [self performSelector:@selector(executeScriptsWhenLoaded:) withObject:scripts afterDelay:0.2];
-        return;
-    }
+    if (webView.isLoading) return [self performSelector:@selector(executeScriptsWhenLoaded:) withObject:scripts afterDelay:1];
     [scripts enumerateObjectsUsingBlock:^(id script, NSUInteger index, BOOL *stop) {
         [webView stringByEvaluatingJavaScriptFromString:script];
     }];

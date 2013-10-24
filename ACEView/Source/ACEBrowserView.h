@@ -8,9 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
-#import <ACEView/KFURLBar.h>
-#import <ACEView/KFWebKitProgressController.h>
-#import <ACEView/ACEView.h>
+#import "KFURLBar/KFURLBar.h"
+#import "KFURLBar/KFWebKitProgressController.h"
+#import "ACEView/ACEView.h"
 
 
 @interface ACEBrowserView : NSView <KFURLBarDelegate, NSWindowDelegate, 
