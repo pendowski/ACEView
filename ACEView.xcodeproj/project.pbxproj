@@ -145,7 +145,7 @@
 		36F169F716B9374200E8965C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		7B4D35311819A36900664C4A /* ACEModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEModes.h; path = Source/Utilities/Headers/ACEModes.h; sourceTree = "<group>"; };
 		7B4D35331819A74000664C4A /* ACEModeArrays.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEModeArrays.m; path = Source/Utilities/ACEModeArrays.m; sourceTree = "<group>"; };
-		7B4D35351819A9C400664C4A /* src */ = {isa = PBXFileReference; lastKnownFileType = file; name = src; path = ACEView/Dependencies/ace/build/src; sourceTree = "<group>"; };
+		7B4D35351819A9C400664C4A /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ACEView/Dependencies/ace/build/src; sourceTree = "<group>"; };
 		7B644CF9181649FB0036D205 /* KFURLBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KFURLBar.xcodeproj; path = KFURLBar/KFURLBar.xcodeproj; sourceTree = "<group>"; };
 		7B644D0C18164AEA0036D205 /* ACEBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEBrowserView.h; path = Source/ACEBrowserView.h; sourceTree = "<group>"; };
 		7B644D0D18164AEA0036D205 /* ACEBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEBrowserView.m; path = Source/ACEBrowserView.m; sourceTree = "<group>"; };
@@ -256,7 +256,7 @@
 		7B644CFA181649FB0036D205 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7B644CFE181649FB0036D205 /* KFURLBar.app */,
+				7B644CFE181649FB0036D205 /* KFURLBarDemo.app */,
 				7B69965D1819539C00CAD9E2 /* libKFURLBar.a */,
 			);
 			name = Products;
@@ -590,10 +590,9 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		7B644CFE181649FB0036D205 /* KFURLBar.app */ = {
+		7B644CFE181649FB0036D205 /* KFURLBarDemo.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
-			name = KFURLBar.app;
 			path = KFURLBarDemo.app;
 			remoteRef = 7B644CFD181649FB0036D205 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -842,8 +841,7 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UpdateAce/UpdateAce-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -867,8 +865,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				ENABLE_NS_ASSERTIONS = NO;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "UpdateAce/UpdateAce-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
@@ -1015,6 +1012,7 @@
 				7B4D352C1819A2EB00664C4A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7B6996791819605C00CAD9E2 /* Build configuration list for PBXNativeTarget "UpdateAce" */ = {
 			isa = XCConfigurationList;
