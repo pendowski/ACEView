@@ -11,6 +11,7 @@
 
 @interface ACEViewAppDelegate : NSObject <NSApplicationDelegate, ACEViewDelegate> {
     IBOutlet ACEView *aceView;
+    IBOutlet ACEBrowserView *browserView;
     
     IBOutlet NSPopUpButton *syntaxMode;
     IBOutlet NSPopUpButton *theme;

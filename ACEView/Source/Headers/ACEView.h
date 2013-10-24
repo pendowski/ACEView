@@ -11,6 +11,7 @@
 #import <ACEView/ACEThemes.h>
 
 
+
 extern NSString *const ACETextDidEndEditingNotification;
 
 /** The ACEViewDelegate protocol is implemented by objects that wish to monitor the ACEView for content changes. */
@@ -221,3 +222,5 @@ extern NSString *const ACETextDidEndEditingNotification;
 - (void) gotoLine:(NSInteger)lineNumber column:(NSInteger)columnNumber animated:(BOOL)animate;
 
 @end
+
+#import <ACEView/ACEBrowserView.h>

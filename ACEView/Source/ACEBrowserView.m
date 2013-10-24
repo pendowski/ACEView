@@ -39,7 +39,7 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 
 @implementation ACEBrowserView
 
--   (id) valueForUndefinedKey:(NSString*)key 	{ return  [_webView valueForKey:key];	}
+//-   (id) valueForUndefinedKey:(NSString*)key 	{ return  [_webView valueForKey:key];	}
 - (void) setHTMLString:(NSString*)HTMLString 	{ [self.aceView setString:HTMLString]; }
 - (void) setUrlBarHeight:(CGFloat)urlBarHeight 	{ _urlBarHeight = urlBarHeight;
 
@@ -50,44 +50,43 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 		for (id x in @[@"policyDelegate", @"frameLoadDelegate", @"downloadDelegate",@"resourceLoadDelegate",@"UIDelegate"])
 			[_webView setValue:_controller forKey:x];
 		_urlBar.autoresizingMask = NSViewWidthSizable|NSViewMinYMargin;
-		[_urlBar setBarColorPendingTop:NSColor.redColor];
-		[_urlBar setBarColorPendingBottom:NSColor.orangeColor];
+//		[_urlBar setBarColorPendingTop:NSColor.redColor];
+//		[_urlBar setBarColorPendingBottom:NSColor.orangeColor];
 	}
 }
 
-- (void) awakeFromNib { self.window.delegate = self.window.delegate ?: self;
+- (void) awakeFromNib { // self.window.delegate = self.window.delegate ?: self;
 	
 	self.urlBarHeight 	= 40;
 	
 	for (id b in @[@"reloadB", @"alertB",@"modeB", @"themeB"]) { NSButton*butt; 
 		
-		[self setValue:butt = NSButton.new forKey:b];
+		[self setValue:									 butt = NSButton.new forKey:b];
 		butt.bezelStyle										 	= NSInlineBezelStyle;
 		butt.translatesAutoresizingMaskIntoConstraints 	= NO;
-//		butt.target 												= self;
-		butt.title = b;
-		[[butt cell] setBackgroundStyle:						  NSBackgroundStyleRaised];
+//		butt.title 													= b;
+//		[[butt cell] setBackgroundStyle:						  NSBackgroundStyleRaised];
 	}
-	__weak ACEBrowserView*  selfish    = self;
-	[_alertB setActionBlock: ^(id sende){ [selfish showAlert:sende]; }];
-	_modeB.actionBlock 	= 	^(id sende){ NSLog(@"Im here lassies!"); [selfish modePop]; };
-	_reloadB.actionBlock = 	^(id sende){  [selfish reloadURL:sende]; };
 	
-	 _alertB.title       = @"Alert";
+	 __block ACEBrowserView *me 	= self;
+	 _alertB.actionBlock 			= ^(id x){ [me showAlert:x]; 	};
+	  _modeB.actionBlock 			= ^(id x){ [me modePop]; 		};
+	_reloadB.actionBlock 			= ^(id x){ [me reloadURL:x]; 	};
+	
 	_reloadB.image			= [NSImage imageNamed:@"NSRefreshTemplate"];
-//	_reloadB.action 		= @selector(reloadURL:);
-//	  _modeB.action 		= @selector(showPopoverAction:);
-//	 _alertB.action 		= @selector(showAlert:);
 	_urlBar.leftItems 	= @[_reloadB, _modeB];
 	_urlBar.rightItems 	= @[_alertB, _themeB];
 
-	[_split 							= [NSSplitView.alloc initWithFrame:NSInsetRect(self.bounds, 0,_urlBarHeight)] setVertical:NO];
+	NSRect splitFrame 			= self.bounds;
+	splitFrame.size.height    -= _urlBarHeight;
+	[_split 							= [NSSplitView.alloc initWithFrame:splitFrame] setVertical:NO];
 	_split.subviews 				= @[ _aceView = [ACEView.alloc init], _webView = [WebView.alloc init]];
 	_split.dividerStyle 			= NSSplitViewDividerStyleThick;
 	_split.autoresizingMask 	= 
 	_webView.autoresizingMask 	= 
 	_aceView.autoresizingMask 	= NSViewWidthSizable|NSViewHeightSizable;
 	[_urlBar bind:@"addressString" toObject:_webView withKeyPath:@"mainFrameURL" options:nil];
+	[_webView bind:@"mainFrameURL" toObject:_aceView withKeyPath:@"mainFrameURL" options:nil];
 	_aceView.delegate 			= self; 
 
 	[self addSubview:_split];
@@ -95,6 +94,8 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 	_aceView.theme 				= ACEThemeMonokai;
 	_aceView. showPrintMargin 	= NO; 
 	_aceView.showInvisibles		= YES;
+	
+
 	_aceView.string 	= [NSString stringWithContentsOfFile:@"/Volumes/2T/ServiceData/git/ACEView/ACEView/Source/Headers/ACEView.h" 
 																 encoding:NSUTF8StringEncoding error:nil];
 
@@ -200,21 +201,19 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 		NSRect base 				 = (NSRect){0,0,100,300};
 		NSScrollView *sv			 = [NSScrollView.alloc initWithFrame:base];
 		base.size.height 			 = 12 * ACEModeNames.humanModeNames.count;
-		[sv setDocumentView:tv   = [NSTableView.alloc initWithFrame:base]];
-		[sv setHasVerticalScroller:YES];
-		[sv setDrawsBackground:NO];
-		[tv setHeaderView:nil];
-		[tv setBackgroundColor:NSColor.clearColor];
-		[tv addTableColumn:c = NSTableColumn.new];
-		[c  setDataCell:cell = NSTextFieldCell.new];
+		sv.documentView			 = tv = [NSTableView.alloc initWithFrame:base];
+		sv.hasVerticalScroller	 = YES;
+		sv.drawsBackground 		 = NO;
+		tv.headerView				 = nil;
+		tv.backgroundColor 		 = NSColor.clearColor;
+		[tv addTableColumn:c 	 = NSTableColumn.new];
+		c.dataCell 					 = cell = NSTextFieldCell.new;
 		[cell setFont:[NSFont fontWithName:@"UbuntuMono-Bold" size:14.0]];
 		[cell setTextColor:NSColor.whiteColor];
-		[c bind:@"value" toObject:	
-			[NSArrayController.alloc initWithContent: ACEModeNames.humanModeNames] 			
+		[c 	bind:@"value" toObject:	
+				[NSArrayController.alloc initWithContent: ACEModeNames.humanModeNames] 			
 				withKeyPath:@"arrangedObjects" options:nil];
 		modeVC.view = sv;
-		tv.actionBlock = ^(id sendo) { NSUInteger idx = [sendo selectedRow]; NSLog(@"selected:%ld", idx);_aceView.mode = idx; 
-	};
 //		[tv setTarget:_aceView];
 //		[tv setAction:@selector(setMode:)];
 		[tv setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleSourceList];
@@ -224,8 +223,13 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 		_modePop.animates = YES;
 	// AppKit will close the popover when the user interacts with a user interface element outside the popover. note that interacting with menus or panels that become key only when needed will not cause a transient popover to close.
 		_modePop.behavior = NSPopoverBehaviorTransient;
+		tv.actionBlock = ^(id sendo) { 			NSUInteger idx = [sendo selectedRow];
+			[self.aceView setMode:idx];
+												 NSLog(@"selected:%ld", idx);_aceView.mode = idx; 
+			[_modePop close];
+		};
 		// so we can be notified when the popover appears or closes
-		_modePop.delegate = self;
+//		_modePop.delegate = self;
 	}	
 	// configure the preferred position of the popove NSRectEdge prefEdge = popoverPosition.selectedRow;
 	[_modePop showRelativeToRect:_modeB.bounds ofView:_urlBar preferredEdge:NSMinYEdge];

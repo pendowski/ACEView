@@ -8,10 +8,9 @@
 
 #import <Cocoa/Cocoa.h>
 #import <WebKit/WebKit.h>
-#import "KFURLBar/KFURLBar.h"
+#import <ACEView/ACEView.h>
+#import <KFURLBar/KFURLBar.h>
 #import "KFURLBar/KFWebKitProgressController.h"
-#import "ACEView/ACEView.h"
-
 
 @interface ACEBrowserView : NSView <KFURLBarDelegate, NSWindowDelegate, 
 												KFWebKitProgressDelegate, 
@@ -21,17 +20,17 @@
 //@property (readonly) NSViewController *vc;
 
 
-@property     WebView *webView;
-@property    KFURLBar *urlBar;
-@property NSSplitView *split;
+@property 	 		  (strong)    WebView *webView;
+@property 	        (strong)   KFURLBar *urlBar;
+@property 	 	     (strong) NSSplitView *split;
 
-@property 	 NSButton 	*reloadB, *alertB, *modeB, *themeB;
-@property 	(nonatomic) NSPopover *modePop, *themePop;
+@property    		  (strong) NSButton 	*reloadB, *alertB, *modeB, *themeB;
+@property (nonatomic,strong) NSPopover *modePop, *themePop;
 
-@property 	  ACEView 		*aceView;
-@property (nonatomic) float progress;
-@property (nonatomic) ACEMode mode;
-@property (nonatomic) ACETheme theme;
+@property 	        (strong)       ACEView * aceView;
+@property        (nonatomic)         float   progress;
+@property        (nonatomic)       ACEMode   mode;
+@property        (nonatomic)      ACETheme   theme;
 
 @property (nonatomic, weak) NSString *HTMLString, *URLString;
 
