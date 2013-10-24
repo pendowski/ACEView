@@ -125,8 +125,8 @@ static NSArray *allowedSelectorNamesForJavaScript;
 	id<NSTextFinderBarContainer> findBarContainer = _textFinder.findBarContainer;
 	if (findBarContainer.isFindBarVisible) {
 		CGFloat findBarHeight = findBarContainer.findBarView.frame.size.height;
-		bounds.origin.y += findBarHeight;
-		bounds.size.height -= findBarHeight;
+		bounds.origin.y      += findBarHeight;
+		bounds.size.height   -= findBarHeight;
 	}
 	[_webView.animator setFrame:NSMakeRect(bounds.origin.x + 1, bounds.origin.y + 1, bounds.size.width - 2, bounds.size.height - 2)];
 }
@@ -141,8 +141,9 @@ static NSArray *allowedSelectorNamesForJavaScript;
 }
 
 - (void) aceTextDidChange { NSNotification *note;
-	[[NSNotificationCenter defaultCenter] postNotification:note = [NSNotification notificationWithName:ACETextDidEndEditingNotification object:self]];	
-	if (self.delegate && [self.delegate respondsToSelector:@selector(textDidChange:)])  [self.delegate performSelector:@selector(textDidChange:) withObject:note];
+	[NSNotificationCenter.defaultCenter postNotification:note = [NSNotification notificationWithName:ACETextDidEndEditingNotification object:self]];	
+	if (self.delegate && [self.delegate respondsToSelector:@selector(textDidChange:)])  
+		[self.delegate performSelector:@selector(textDidChange:) withObject:note];
 }
 
 #pragma mark - Public
@@ -157,57 +158,58 @@ static NSArray *allowedSelectorNamesForJavaScript;
 												@"ACEView.aceTextDidChange();"]];
 }
 
-- (void) setMode:(ACEMode)mode {
+#define SETIT(x) _##x = x
+- (void) setMode:(ACEMode)mode {  SETIT(mode);
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.getSession().setMode(\"ace/mode/%@\");", [ACEModeNames nameForMode:mode]]];
 }
-- (void) setTheme:(ACETheme)theme {
+- (void) setTheme:(ACETheme)theme { SETIT(theme);
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setTheme(\"ace/theme/%@\");", [ACEThemeNames nameForTheme:theme]]];
 }
 
-- (void) setWrappingBehavioursEnabled:(BOOL)wrap {
+- (void) setWrappingBehavioursEnabled:(BOOL)wrap { _wrappingBehavioursEnabled = wrap;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setWrapBehavioursEnabled(%@);", ACEStringFromBool(wrap)]];
 }
-- (void) setUseSoftWrap:(BOOL)wrap {
+- (void) setUseSoftWrap:(BOOL)wrap { _useSoftWrap = wrap;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.getSession().setUseWrapMode(%@);", ACEStringFromBool(wrap)]];
 }
-- (void) setWrapLimitRange:(NSRange)range {
+- (void) setWrapLimitRange:(NSRange)range { _wrapLimitRange = range;
 	[self setUseSoftWrap:YES];
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.getSession().setWrapLimitRange(%ld, %ld);", range.location, range.length]];
 }
-- (void) setShowInvisibles:(BOOL)show {
+- (void) setShowInvisibles:(BOOL)show { _showInvisibles = show;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setShowInvisibles(%@);", ACEStringFromBool(show)]];
 }
-- (void) setShowFoldWidgets:(BOOL)show {
+- (void) setShowFoldWidgets:(BOOL)show { _showFoldWidgets = show;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setShowFoldWidgets(%@);", ACEStringFromBool(show)]];
 }
-- (void) setFadeFoldWidgets:(BOOL)fade {
+- (void) setFadeFoldWidgets:(BOOL)fade { _fadeFoldWidgets = fade;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setFadeFoldWidgets(%@);", ACEStringFromBool(fade)]];
 }
-- (void) setHighlightActiveLine:(BOOL)highlight {
+- (void) setHighlightActiveLine:(BOOL)highlight { _highlightActiveLine = highlight;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setHighlightActiveLine(%@);", ACEStringFromBool(highlight)]];
 }
-- (void) setHighlightGutterLine:(BOOL)highlight {
+- (void) setHighlightGutterLine:(BOOL)highlight { _highlightGutterLine = highlight;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setHighlightGutterLine(%@);", ACEStringFromBool(highlight)]];
 }
-- (void) setHighlightSelectedWord:(BOOL)highlight {
+- (void) setHighlightSelectedWord:(BOOL)highlight { _highlightSelectedWord = highlight;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setHighlightSelectedWord(%@);", ACEStringFromBool(highlight)]];
 }
-- (void) setDisplayIndentGuides:(BOOL)display {
+- (void) setDisplayIndentGuides:(BOOL)display { _displayIndentGuides = display;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setDisplayIndentGuides(%@);", ACEStringFromBool(display)]];
 }
-- (void) setAnimatedScroll:(BOOL)animate {
+- (void) setAnimatedScroll:(BOOL)animate { _animatedScroll = animate;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setAnimatedScroll(%@);", ACEStringFromBool(animate)]];
 }
-- (void) setScrollSpeed:(NSUInteger)speed {
+- (void) setScrollSpeed:(NSUInteger)speed { _scrollSpeed = speed;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setScrollSpeed(%ld);", speed]];
 }
-- (void) setPrintMarginColumn:(NSUInteger)column {
+- (void) setPrintMarginColumn:(NSUInteger)column { _printMarginColumn = column;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setPrintMarginColumn(%ld);", column]];
 }
-- (void) setShowPrintMargin:(BOOL)show {
+- (void) setShowPrintMargin:(BOOL)show { _showPrintMargin = show;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setShowPrintMargin(%@);", ACEStringFromBool(show)]];
 }
-- (void) setFontSize:(NSUInteger)size {
+- (void) setFontSize:(NSUInteger)size { _fontSize = size;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setFontSize('%ldpx');", size]];
 }
 

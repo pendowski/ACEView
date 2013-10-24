@@ -63,7 +63,7 @@ extern NSString *const ACETextDidEndEditingNotification;
  @param mode The mode to set.
  @see ACEMode
  */
-@property ACEMode mode;
+@property (nonatomic) ACEMode mode;
 
 /** Set the theme.
 
@@ -73,7 +73,7 @@ extern NSString *const ACETextDidEndEditingNotification;
  @see ACETheme
  */
  
-@property ACETheme theme;
+@property (nonatomic) ACETheme theme;
 
 /** Turn wrapping behaviour on or off.
 
@@ -85,7 +85,7 @@ extern NSString *const ACETextDidEndEditingNotification;
  @see setUseSoftWrap:
  @see setWrapLimitRange:
  */
-@property BOOL wrappingBehavioursEnabled;
+@property (nonatomic) BOOL wrappingBehavioursEnabled;
 /** Sets whether or not line wrapping is enabled.
 
  Define the wrap limit with setWrapLimitRange.
@@ -96,7 +96,7 @@ extern NSString *const ACETextDidEndEditingNotification;
  @see setWrappingBehavioursEnabled:
  @see setWrapLimitRange:
  */
-@property BOOL useSoftWrap;
+@property (nonatomic) BOOL useSoftWrap;
 /**  Sets the boundaries of wrap.
 
  Uses [editor.getSession().setWrapLimitRange()](http://ace.ajax.org/#EditSession.setWrapLimitRange).
@@ -105,35 +105,35 @@ extern NSString *const ACETextDidEndEditingNotification;
  @see setWrappingBehavioursEnabled:
  @see setUseSoftWrap:
  */
-- (void) setWrapLimitRange:(NSRange)range;
+@property (nonatomic) NSRange wrapLimitRange;
 /** Show or hide invisible characters.
 
  Uses [editor.setShowInvisibles()](http://ace.ajax.org/#Editor.setShowInvisibles).
 
  @param show YES if inivisible characters are to be shown, NO otherwise.
  */
-@property BOOL showInvisibles;
+@property (nonatomic) BOOL showInvisibles;
 /** Show or hide folding widgets.
 
  Uses [editor.setShowFoldWidgets()](http://ace.ajax.org/#Editor.setShowFoldWidgets).
 
  @param show YES if folding widgets are to be shown, NO otherwise.
  */
-@property BOOL showFoldWidgets;
+@property (nonatomic) BOOL showFoldWidgets;
 /** Enable fading of folding widgets.
 
  Uses [editor.setFadeFoldWidgets()](http://ace.ajax.org/#Editor.setFadeFoldWidgets).
 
  @param fade YES if folding widgets should be faded, NO otherwise.
  */
-@property BOOL fadeFoldWidgets;
+@property (nonatomic) BOOL fadeFoldWidgets;
 /** Highlight the active line.
 
  Uses [editor.setHighlightActiveLine()](http://ace.ajax.org/#Editor.setHighlightActiveLine).
 
  @param highlight YES if the active line should be highlighted, NO otherwise.
  */
-@property BOOL highlightActiveLine;
+@property (nonatomic) BOOL highlightActiveLine;
 /** Highlight the gutter line.
 
  Uses [editor.setHighlightGutterLine()](http://ace.ajax.org/#Editor.setHighlightGutterLine).
@@ -141,21 +141,21 @@ extern NSString *const ACETextDidEndEditingNotification;
  @warning The ACE Editor documentation for this behaviour is incomplete.
  @param highlight YES if the gutter line should be highlighted, NO otherwise.
  */
-@property BOOL highlightGutterLine;
+@property (nonatomic) BOOL highlightGutterLine;
 /** Highlight the selected word.
 
  Uses [editor.setHighlightSelectedWord()](http://ace.ajax.org/#Editor.setHighlightSelectedWord).
 
  @param highlight YES if the selected word should be highlighted, NO otherwise.
  */
-@property BOOL highlightSelectedWord;
+@property (nonatomic) BOOL highlightSelectedWord;
 /** Display indent guides.
 
  Uses [editor.setDisplayIndentGuides()](http://ace.ajax.org/#Editor.setDisplayIndentGuides).
 
  @param display YES if indent guides should be displayed, NO otherwise.
  */
-@property BOOL displayIndentGuides;
+@property (nonatomic) BOOL displayIndentGuides;
 /** Enable animated scrolling.
 
  Uses [editor.setAnimatedScroll()](http://ace.ajax.org/#Editor.setAnimatedScroll).
@@ -163,34 +163,34 @@ extern NSString *const ACETextDidEndEditingNotification;
  @warning The ACE Editor documentation for this behaviour is incomplete.
  @param animate YES if scrolling should be animated, NO otherwise.
  */
-@property BOOL animatedScroll;
+@property (nonatomic) BOOL animatedScroll;
 /** Change the mouse scroll speed.
 
  Uses [editor.setScrollSpeed()](http://ace.ajax.org/#Editor.setScrollSpeed).
 
  @param speed the new scroll speed (in milliseconds).
  */
-@property NSUInteger scrollSpeed;
+@property (nonatomic) NSUInteger scrollSpeed;
 /** Sets the column defining where the print margin should be.
 
  Uses [editor.setPrintMarginColumn()]( http://ace.ajax.org/#Editor.setPrintMarginColumn ).
 
  @param column The column on which the print margin should be drawn.
  */
-@property NSUInteger printMarginColumn;
+@property (nonatomic) NSUInteger printMarginColumn;
 /**
  
  Uses [editor.setShowPrintMargin()]( http://ace.ajax.org/#api=editor&nav=setShowPrintMargin ).
  
  */
-@property BOOL  showPrintMargin;
+@property (nonatomic) BOOL  showPrintMargin;
 /** Sets the font size.
 
  Uses [editor.setFontSize()](http://ace.ajax.org/#Editor.setFontSize).
 
  @param size The new font size.
  */
-@property NSUInteger fontSize;
+@property (nonatomic) NSUInteger fontSize;
 /** Moves the cursor to the specified line number, and also into the indiciated column.
  
  Uses [editor.goToLine()].
