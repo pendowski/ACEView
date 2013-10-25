@@ -5,7 +5,7 @@
 //  Created by Michael Robinson on 2/12/12.
 //  Copyright (c) 2012 Code of Interest. All rights reserved.
 //
-#import <ACEView/ACEModes.h>
+//#import <ACEView/ACEModes.h>
 
 NSString *const _ACEModeNames[ACEModeCount];
 NSString *const _ACEModeNamesHuman[ACEModeCount];
@@ -17,7 +17,8 @@ NSString *const _ACEModeNamesHuman[ACEModeCount];
 
  */
 
-@interface ACEModeNames : NSObject { }
+
+@interface ACEModes : NSObject { }
 
 /**---------------------------------------------------------------------------------------
  * @name Class Methods
@@ -47,5 +48,5 @@ NSString *const _ACEModeNamesHuman[ACEModeCount];
  @return The human-readable ACE mode name corresponding to the given ACEMode constant.
  */
 + (NSString *) humanNameForMode:(ACEMode)mode;
-
++ (ACEMode)modeForName:(NSString*)name;
 @end

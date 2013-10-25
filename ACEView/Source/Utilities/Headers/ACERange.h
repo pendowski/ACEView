@@ -54,9 +54,9 @@ NS_INLINE ACERange ACEMakeRange(NSRange range, NSString *string) {
 }
 
 NS_INLINE NSString *ACEStringFromACERange(ACERange range) {
-    NSString *string = [NSString stringWithFormat:@"{ %lu, %lu }, { %lu, %lu }",
+	return [NSString stringWithFormat:@"{ %lu, %lu }, { %lu, %lu }",
                         range.row.start, range.row.end, range.column.start, range.column.end];
-    return [string autorelease];
+// autorelease];
 }
 
 NS_INLINE NSString *ACEStringFromRangeAndString(NSRange range, NSString *string) {

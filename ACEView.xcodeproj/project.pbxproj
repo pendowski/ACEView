@@ -29,50 +29,33 @@
 		36F169ED16B9346C00E8965C /* ACEView_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F169EC16B9346C00E8965C /* ACEView_Tests.m */; };
 		36F169F816B9374200E8965C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F169F616B9374200E8965C /* MainMenu.xib */; };
 		36F169F916B9375D00E8965C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F169F616B9374200E8965C /* MainMenu.xib */; };
-		7B4D35321819A36900664C4A /* ACEModes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B4D35311819A36900664C4A /* ACEModes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7B4D35341819A74000664C4A /* ACEModeArrays.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B4D35331819A74000664C4A /* ACEModeArrays.m */; };
 		7B4D35361819A9C500664C4A /* src in Copy ACE JavaScript */ = {isa = PBXBuildFile; fileRef = 7B4D35351819A9C400664C4A /* src */; };
 		7B644D0E18164AEA0036D205 /* ACEBrowserView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B644D0C18164AEA0036D205 /* ACEBrowserView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7B644D0F18164AEA0036D205 /* ACEBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B644D0D18164AEA0036D205 /* ACEBrowserView.m */; };
-		7B699660181953AB00CAD9E2 /* libKFURLBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B69965D1819539C00CAD9E2 /* libKFURLBar.a */; };
 		7B6996711819605C00CAD9E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6996701819605C00CAD9E2 /* Foundation.framework */; };
 		7B6996741819605C00CAD9E2 /* updateAce.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6996731819605C00CAD9E2 /* updateAce.m */; };
 		7B69967D1819631000CAD9E2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8A728F15EA0769007E5EB8 /* Cocoa.framework */; };
 		7B69967F18196A0F00CAD9E2 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B69967E18196A0F00CAD9E2 /* JavaScriptCore.framework */; };
-		7C08C07C1672ED23000D4A97 /* NSInvocation+MainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7B8C888A181A113A00A43EE4 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B69967E18196A0F00CAD9E2 /* JavaScriptCore.framework */; };
+		7B8C888B181A124400A43EE4 /* ACEBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B644D0D18164AEA0036D205 /* ACEBrowserView.m */; };
+		7BB2B66C181A473C0078A9C1 /* libKFURLBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB2B669181A47190078A9C1 /* libKFURLBar.a */; };
+		7C08C07C1672ED23000D4A97 /* NSInvocation+MainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */; };
 		7C08C07E1672ED30000D4A97 /* NSInvocation+MainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */; };
-		7C08C0821672FD92000D4A97 /* ACEStringFromBool.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C08C0811672FD1B000D4A97 /* ACEStringFromBool.h */; settings = {ATTRIBUTES = (); }; };
-		7C86C825166B47AF00AE3A57 /* ACEModeNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C86C823166B47AF00AE3A57 /* ACEModeNames.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7C86C827166B4FD000AE3A57 /* ACEThemes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C86C826166B4FD000AE3A57 /* ACEThemes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C86C829166B506D00AE3A57 /* ACEThemeNames.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C86C828166B506D00AE3A57 /* ACEThemeNames.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C86C82B166B507A00AE3A57 /* ACEThemeNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C86C82A166B507A00AE3A57 /* ACEThemeNames.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7C86C84E166F184D00AE3A57 /* ACERange.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C86C84D166F184C00AE3A57 /* ACERange.h */; };
-		7C86C852166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C86C850166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7C86C852166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C86C850166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m */; };
 		7C86C854166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C86C853166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h */; };
 		7C8A729015EA0769007E5EB8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8A728F15EA0769007E5EB8 /* Cocoa.framework */; };
 		7C8A72E215EA0F0E007E5EB8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8A728F15EA0769007E5EB8 /* Cocoa.framework */; };
-		7C8A72E815EA0F0E007E5EB8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C8A72E615EA0F0E007E5EB8 /* InfoPlist.strings */; };
 		7C8A72EA15EA0F0E007E5EB8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8A72E915EA0F0E007E5EB8 /* main.m */; };
-		7C8A72EE15EA0F0E007E5EB8 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 7C8A72EC15EA0F0E007E5EB8 /* Credits.rtf */; };
 		7C8A72F115EA0F0E007E5EB8 /* ACEViewAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8A72F015EA0F0E007E5EB8 /* ACEViewAppDelegate.m */; };
 		7C8A72F815EA0F28007E5EB8 /* ACEView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8A728C15EA0769007E5EB8 /* ACEView.framework */; };
 		7C8A72FA15EA0FCB007E5EB8 /* HTML5.html in Resources */ = {isa = PBXBuildFile; fileRef = 7C8A72F915EA0FCB007E5EB8 /* HTML5.html */; };
 		7C8A72FF15EA1414007E5EB8 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8A72FE15EA1414007E5EB8 /* WebKit.framework */; };
-		7C9B66BE166AF49F00A24CB7 /* ACEView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B66BC166AF49F00A24CB7 /* ACEView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7C9B66BE166AF49F00A24CB7 /* ACEView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B66BC166AF49F00A24CB7 /* ACEView.m */; };
 		7C9B66C2166AF4C600A24CB7 /* ACEView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C9B66C1166AF4C600A24CB7 /* ACEView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C9B66C5166AF4E900A24CB7 /* ACELogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C9B66C4166AF4E900A24CB7 /* ACELogger.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7C9B66C7166AF4F600A24CB7 /* ACELogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C9B66C6166AF4F600A24CB7 /* ACELogger.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		7C9B672B166B117200A24CB7 /* ACEModeNames.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C9B672A166B117100A24CB7 /* ACEModeNames.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7B4D35261819A1DC00664C4A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7C8A728215EA0769007E5EB8 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7B69966E1819605C00CAD9E2;
-			remoteInfo = UpdateAce;
-		};
 		7B4D352D1819A2F100664C4A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7C8A728215EA0769007E5EB8 /* Project object */;
@@ -87,25 +70,25 @@
 			remoteGlobalIDString = 7C8A728B15EA0769007E5EB8;
 			remoteInfo = ACEView;
 		};
-		7B644CFD181649FB0036D205 /* PBXContainerItemProxy */ = {
+		7BB2B666181A47190078A9C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7B644CF9181649FB0036D205 /* KFURLBar.xcodeproj */;
+			containerPortal = 7BB2B661181A47190078A9C1 /* KFURLBar.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 1D1706A816EA342F008920CC;
-			remoteInfo = KFURLBar;
+			remoteInfo = KFURLBarDemo;
 		};
-		7B6996581819539C00CAD9E2 /* PBXContainerItemProxy */ = {
+		7BB2B668181A47190078A9C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7B644CF9181649FB0036D205 /* KFURLBar.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 7B69962F1819533F00CAD9E2;
-			remoteInfo = KFURLBar;
-		};
-		7B69965C1819539C00CAD9E2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7B644CF9181649FB0036D205 /* KFURLBar.xcodeproj */;
+			containerPortal = 7BB2B661181A47190078A9C1 /* KFURLBar.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 7B6996301819533F00CAD9E2;
+			remoteInfo = KFURLBar;
+		};
+		7BB2B66A181A471E0078A9C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7BB2B661181A47190078A9C1 /* KFURLBar.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B69962F1819533F00CAD9E2;
 			remoteInfo = KFURLBar;
 		};
 /* End PBXContainerItemProxy section */
@@ -143,27 +126,19 @@
 		36F169EC16B9346C00E8965C /* ACEView_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEView_Tests.m; sourceTree = "<group>"; };
 		36F169EE16B9346C00E8965C /* ACEView Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACEView Tests-Prefix.pch"; sourceTree = "<group>"; };
 		36F169F716B9374200E8965C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		7B4D35311819A36900664C4A /* ACEModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEModes.h; path = Source/Utilities/Headers/ACEModes.h; sourceTree = "<group>"; };
-		7B4D35331819A74000664C4A /* ACEModeArrays.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEModeArrays.m; path = Source/Utilities/ACEModeArrays.m; sourceTree = "<group>"; };
 		7B4D35351819A9C400664C4A /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ACEView/Dependencies/ace/build/src; sourceTree = "<group>"; };
-		7B644CF9181649FB0036D205 /* KFURLBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KFURLBar.xcodeproj; path = KFURLBar/KFURLBar.xcodeproj; sourceTree = "<group>"; };
-		7B644D0C18164AEA0036D205 /* ACEBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEBrowserView.h; path = Source/ACEBrowserView.h; sourceTree = "<group>"; };
-		7B644D0D18164AEA0036D205 /* ACEBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEBrowserView.m; path = Source/ACEBrowserView.m; sourceTree = "<group>"; };
-		7B69966918195EB500CAD9E2 /* ace */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ace; sourceTree = "<group>"; };
+		7B644D0C18164AEA0036D205 /* ACEBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEBrowserView.h; path = ACEView/Source/ACEBrowserView.h; sourceTree = "<group>"; };
+		7B644D0D18164AEA0036D205 /* ACEBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEBrowserView.m; path = ACEView/Source/ACEBrowserView.m; sourceTree = "<group>"; };
 		7B69966F1819605C00CAD9E2 /* UpdateAce */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = UpdateAce; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B6996701819605C00CAD9E2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7B6996731819605C00CAD9E2 /* updateAce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = updateAce.m; path = UpdateAce/updateAce.m; sourceTree = "<group>"; };
+		7B6996731819605C00CAD9E2 /* updateAce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = updateAce.m; path = ../UpdateAce/updateAce.m; sourceTree = "<group>"; };
 		7B69967E18196A0F00CAD9E2 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+MainThread.m"; path = "Source/Categories/NSInvocation+MainThread.m"; sourceTree = "<group>"; };
-		7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+MainThread.h"; path = "Source/Categories/Headers/NSInvocation+MainThread.h"; sourceTree = "<group>"; };
-		7C08C0811672FD1B000D4A97 /* ACEStringFromBool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ACEStringFromBool.h; path = Source/Utilities/Headers/ACEStringFromBool.h; sourceTree = "<group>"; };
-		7C86C823166B47AF00AE3A57 /* ACEModeNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEModeNames.m; path = Source/Utilities/ACEModeNames.m; sourceTree = "<group>"; };
-		7C86C826166B4FD000AE3A57 /* ACEThemes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEThemes.h; path = Source/Utilities/Headers/ACEThemes.h; sourceTree = "<group>"; };
-		7C86C828166B506D00AE3A57 /* ACEThemeNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEThemeNames.h; path = Source/Utilities/Headers/ACEThemeNames.h; sourceTree = "<group>"; };
-		7C86C82A166B507A00AE3A57 /* ACEThemeNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEThemeNames.m; path = Source/Utilities/ACEThemeNames.m; sourceTree = "<group>"; };
-		7C86C84D166F184C00AE3A57 /* ACERange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACERange.h; path = Source/Utilities/Headers/ACERange.h; sourceTree = "<group>"; };
-		7C86C850166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+EscapeForJavaScript.m"; path = "Source/Categories/NSString+EscapeForJavaScript.m"; sourceTree = "<group>"; };
-		7C86C853166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+EscapeForJavaScript.h"; path = "Source/Categories/Headers/NSString+EscapeForJavaScript.h"; sourceTree = "<group>"; };
+		7BB2B661181A47190078A9C1 /* KFURLBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KFURLBar.xcodeproj; path = KFURLBar/KFURLBar.xcodeproj; sourceTree = "<group>"; };
+		7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+MainThread.m"; path = "ACEView/Source/Categories/NSInvocation+MainThread.m"; sourceTree = "<group>"; };
+		7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+MainThread.h"; path = "ACEView/Source/Categories/Headers/NSInvocation+MainThread.h"; sourceTree = "<group>"; };
+		7C86C84D166F184C00AE3A57 /* ACERange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACERange.h; path = ACEView/Source/Utilities/Headers/ACERange.h; sourceTree = "<group>"; };
+		7C86C850166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+EscapeForJavaScript.m"; path = "ACEView/Source/Categories/NSString+EscapeForJavaScript.m"; sourceTree = "<group>"; };
+		7C86C853166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+EscapeForJavaScript.h"; path = "ACEView/Source/Categories/Headers/NSString+EscapeForJavaScript.h"; sourceTree = "<group>"; };
 		7C8A728C15EA0769007E5EB8 /* ACEView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACEView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8A728F15EA0769007E5EB8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7C8A729215EA0769007E5EB8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -171,23 +146,19 @@
 		7C8A729415EA0769007E5EB8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7C8A72E015EA0F0E007E5EB8 /* ACEVIewExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACEVIewExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8A72E515EA0F0E007E5EB8 /* ACE View Example-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACE View Example-Info.plist"; sourceTree = "<group>"; };
-		7C8A72E715EA0F0E007E5EB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7C8A72E915EA0F0E007E5EB8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7C8A72EB15EA0F0E007E5EB8 /* ACE View Example-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACE View Example-Prefix.pch"; sourceTree = "<group>"; };
-		7C8A72ED15EA0F0E007E5EB8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		7C8A72EF15EA0F0E007E5EB8 /* ACEViewAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACEViewAppDelegate.h; sourceTree = "<group>"; };
 		7C8A72F015EA0F0E007E5EB8 /* ACEViewAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEViewAppDelegate.m; sourceTree = "<group>"; };
 		7C8A72F915EA0FCB007E5EB8 /* HTML5.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = HTML5.html; path = Content/HTML5.html; sourceTree = "<group>"; };
 		7C8A72FE15EA1414007E5EB8 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		7C9B5F12166AEB9700A24CB7 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = html/index.html; sourceTree = "<group>"; };
-		7C9B66BC166AF49F00A24CB7 /* ACEView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEView.m; path = Source/ACEView.m; sourceTree = "<group>"; };
-		7C9B66C1166AF4C600A24CB7 /* ACEView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEView.h; path = Source/Headers/ACEView.h; sourceTree = "<group>"; };
-		7C9B66C4166AF4E900A24CB7 /* ACELogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACELogger.h; path = Source/Utilities/Headers/ACELogger.h; sourceTree = "<group>"; };
-		7C9B66C6166AF4F600A24CB7 /* ACELogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACELogger.m; path = Source/Utilities/ACELogger.m; sourceTree = "<group>"; };
+		7C9B5F12166AEB9700A24CB7 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = ACEView/html/index.html; sourceTree = "<group>"; };
+		7C9B66BC166AF49F00A24CB7 /* ACEView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEView.m; path = ACEView/Source/ACEView.m; sourceTree = "<group>"; };
+		7C9B66C1166AF4C600A24CB7 /* ACEView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEView.h; path = ACEView/Source/Headers/ACEView.h; sourceTree = "<group>"; };
+		7C9B66C4166AF4E900A24CB7 /* ACELogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACELogger.h; path = ACEView/Source/Utilities/Headers/ACELogger.h; sourceTree = "<group>"; };
+		7C9B66C6166AF4F600A24CB7 /* ACELogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACELogger.m; path = ACEView/Source/Utilities/ACELogger.m; sourceTree = "<group>"; };
 		7C9B66C8166AF5AD00A24CB7 /* ACEView-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ACEView-Info.plist"; sourceTree = "<group>"; };
 		7C9B66CA166AF5DF00A24CB7 /* ACEView-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ACEView-Prefix.pch"; sourceTree = "<group>"; };
-		7C9B6728166B0FED00A24CB7 /* ACEModesBak.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEModesBak.h; path = Source/Utilities/Headers/ACEModesBak.h; sourceTree = "<group>"; };
-		7C9B672A166B117100A24CB7 /* ACEModeNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEModeNames.h; path = Source/Utilities/Headers/ACEModeNames.h; sourceTree = "<group>"; };
 		7CAF0CFF15EBAA7C00161329 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,7 +186,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B699660181953AB00CAD9E2 /* libKFURLBar.a in Frameworks */,
+				7BB2B66C181A473C0078A9C1 /* libKFURLBar.a in Frameworks */,
+				7B8C888A181A113A00A43EE4 /* JavaScriptCore.framework in Frameworks */,
 				7C8A72FF15EA1414007E5EB8 /* WebKit.framework in Frameworks */,
 				7C8A729015EA0769007E5EB8 /* Cocoa.framework in Frameworks */,
 			);
@@ -241,7 +213,7 @@
 				36F169E616B9346C00E8965C /* Supporting Files */,
 			);
 			path = "ACEView Tests";
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 		36F169E616B9346C00E8965C /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -253,43 +225,35 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7B644CFA181649FB0036D205 /* Products */ = {
+		7BB2B662181A47190078A9C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7B644CFE181649FB0036D205 /* KFURLBarDemo.app */,
-				7B69965D1819539C00CAD9E2 /* libKFURLBar.a */,
+				7BB2B667181A47190078A9C1 /* KFURLBarDemo.app */,
+				7BB2B669181A47190078A9C1 /* libKFURLBar.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		7B644D0B18164A220036D205 /* WebView and URLBar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "WebView and URLBar";
-			path = ..;
-			sourceTree = "<group>";
-		};
-		7C86C846166CCB0900AE3A57 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */,
-				7C86C853166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h */,
-			);
-			name = Headers;
 			sourceTree = "<group>";
 		};
 		7C8A728015EA0769007E5EB8 = {
 			isa = PBXGroup;
 			children = (
-				7B4D35351819A9C400664C4A /* src */,
-				7B644CF9181649FB0036D205 /* KFURLBar.xcodeproj */,
-				7C8A729515EA0769007E5EB8 /* ACEView */,
+				7BB2B661181A47190078A9C1 /* KFURLBar.xcodeproj */,
 				7C8A72E315EA0F0E007E5EB8 /* ACE View Example */,
-				36F169E516B9346C00E8965C /* ACEView Tests */,
-				7B6996731819605C00CAD9E2 /* updateAce.m */,
-				7C8A728E15EA0769007E5EB8 /* Frameworks */,
+				7B644D0C18164AEA0036D205 /* ACEBrowserView.h */,
+				7B644D0D18164AEA0036D205 /* ACEBrowserView.m */,
+				7C9B66C4166AF4E900A24CB7 /* ACELogger.h */,
+				7C9B66C6166AF4F600A24CB7 /* ACELogger.m */,
+				7C86C84D166F184C00AE3A57 /* ACERange.h */,
+				7C9B66C1166AF4C600A24CB7 /* ACEView.h */,
+				7C9B66BC166AF49F00A24CB7 /* ACEView.m */,
+				7C9B5F12166AEB9700A24CB7 /* index.html */,
+				7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */,
+				7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */,
+				7C86C853166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h */,
+				7C86C850166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m */,
 				7C8A728D15EA0769007E5EB8 /* Products */,
+				7B4D35351819A9C400664C4A /* src */,
+				7C8A729615EA0769007E5EB8 /* Supporting Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -314,6 +278,7 @@
 				7C8A729115EA0769007E5EB8 /* Other Frameworks */,
 			);
 			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		7C8A729115EA0769007E5EB8 /* Other Frameworks */ = {
@@ -326,26 +291,19 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		7C8A729515EA0769007E5EB8 /* ACEView */ = {
-			isa = PBXGroup;
-			children = (
-				7C9B66B6166AF46900A24CB7 /* Source */,
-				7C9B5F10166AEB6700A24CB7 /* HTML */,
-				7CAF085F15EBA74900161329 /* Dependencies */,
-				7C8A729615EA0769007E5EB8 /* Supporting Files */,
-				7CAF0CEF15EBA7D500161329 /* Frameworks */,
-			);
-			path = ACEView;
-			sourceTree = "<group>";
-		};
 		7C8A729615EA0769007E5EB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				36F169E516B9346C00E8965C /* ACEView Tests */,
+				7B6996731819605C00CAD9E2 /* updateAce.m */,
+				7C8A728E15EA0769007E5EB8 /* Frameworks */,
+				7C8A72FE15EA1414007E5EB8 /* WebKit.framework */,
 				7C9B66C8166AF5AD00A24CB7 /* ACEView-Info.plist */,
 				7CAF0CFE15EBAA7C00161329 /* InfoPlist.strings */,
 				7C9B66CA166AF5DF00A24CB7 /* ACEView-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = ACEView;
 			sourceTree = "<group>";
 		};
 		7C8A72E315EA0F0E007E5EB8 /* ACE View Example */ = {
@@ -353,6 +311,7 @@
 			children = (
 				7C8A72EF15EA0F0E007E5EB8 /* ACEViewAppDelegate.h */,
 				7C8A72F015EA0F0E007E5EB8 /* ACEViewAppDelegate.m */,
+				36F169F616B9374200E8965C /* MainMenu.xib */,
 				7C8A72E415EA0F0E007E5EB8 /* Supporting Files */,
 				7C8A72F915EA0FCB007E5EB8 /* HTML5.html */,
 			);
@@ -362,98 +321,11 @@
 		7C8A72E415EA0F0E007E5EB8 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				36F169F616B9374200E8965C /* MainMenu.xib */,
 				7C8A72E515EA0F0E007E5EB8 /* ACE View Example-Info.plist */,
-				7C8A72E615EA0F0E007E5EB8 /* InfoPlist.strings */,
 				7C8A72E915EA0F0E007E5EB8 /* main.m */,
 				7C8A72EB15EA0F0E007E5EB8 /* ACE View Example-Prefix.pch */,
-				7C8A72EC15EA0F0E007E5EB8 /* Credits.rtf */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7C9B5F10166AEB6700A24CB7 /* HTML */ = {
-			isa = PBXGroup;
-			children = (
-				7C9B5F12166AEB9700A24CB7 /* index.html */,
-			);
-			name = HTML;
-			sourceTree = "<group>";
-		};
-		7C9B66B6166AF46900A24CB7 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				7C9B66CC166AFAD000A24CB7 /* Categories */,
-				7C9B66BF166AF4A800A24CB7 /* Utilities */,
-				7C9B66C0166AF4C100A24CB7 /* Headers */,
-				7C9B66BC166AF49F00A24CB7 /* ACEView.m */,
-				7B644D0C18164AEA0036D205 /* ACEBrowserView.h */,
-				7B644D0D18164AEA0036D205 /* ACEBrowserView.m */,
-			);
-			name = Source;
-			sourceTree = "<group>";
-		};
-		7C9B66BF166AF4A800A24CB7 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				7C9B66C3166AF4C900A24CB7 /* Headers */,
-				7C9B66C6166AF4F600A24CB7 /* ACELogger.m */,
-				7C86C823166B47AF00AE3A57 /* ACEModeNames.m */,
-				7B4D35331819A74000664C4A /* ACEModeArrays.m */,
-				7C86C82A166B507A00AE3A57 /* ACEThemeNames.m */,
-			);
-			name = Utilities;
-			sourceTree = "<group>";
-		};
-		7C9B66C0166AF4C100A24CB7 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				7C9B66C1166AF4C600A24CB7 /* ACEView.h */,
-			);
-			name = Headers;
-			sourceTree = "<group>";
-		};
-		7C9B66C3166AF4C900A24CB7 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				7B4D35311819A36900664C4A /* ACEModes.h */,
-				7C86C84D166F184C00AE3A57 /* ACERange.h */,
-				7C9B66C4166AF4E900A24CB7 /* ACELogger.h */,
-				7C9B6728166B0FED00A24CB7 /* ACEModesBak.h */,
-				7C9B672A166B117100A24CB7 /* ACEModeNames.h */,
-				7C86C826166B4FD000AE3A57 /* ACEThemes.h */,
-				7C86C828166B506D00AE3A57 /* ACEThemeNames.h */,
-				7C08C0811672FD1B000D4A97 /* ACEStringFromBool.h */,
-			);
-			name = Headers;
-			sourceTree = "<group>";
-		};
-		7C9B66CC166AFAD000A24CB7 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				7C86C846166CCB0900AE3A57 /* Headers */,
-				7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */,
-				7C86C850166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m */,
-			);
-			name = Categories;
-			sourceTree = "<group>";
-		};
-		7CAF085F15EBA74900161329 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				7B69966918195EB500CAD9E2 /* ace */,
-				7B644D0B18164A220036D205 /* WebView and URLBar */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
-		7CAF0CEF15EBA7D500161329 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				7C8A72FE15EA1414007E5EB8 /* WebKit.framework */,
-			);
-			name = Frameworks;
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,14 +335,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B4D35321819A36900664C4A /* ACEModes.h in Headers */,
 				7C9B66C2166AF4C600A24CB7 /* ACEView.h in Headers */,
-				7C9B672B166B117200A24CB7 /* ACEModeNames.h in Headers */,
-				7C86C827166B4FD000AE3A57 /* ACEThemes.h in Headers */,
-				7C86C829166B506D00AE3A57 /* ACEThemeNames.h in Headers */,
 				7C9B66C5166AF4E900A24CB7 /* ACELogger.h in Headers */,
 				7C86C84E166F184D00AE3A57 /* ACERange.h in Headers */,
-				7C08C0821672FD92000D4A97 /* ACEStringFromBool.h in Headers */,
 				7C86C854166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h in Headers */,
 				7B644D0E18164AEA0036D205 /* ACEBrowserView.h in Headers */,
 				7C08C07E1672ED30000D4A97 /* NSInvocation+MainThread.h in Headers */,
@@ -528,7 +395,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				7B6996591819539C00CAD9E2 /* PBXTargetDependency */,
+				7BB2B66B181A471E0078A9C1 /* PBXTargetDependency */,
 			);
 			name = ACEView;
 			productName = ACEView;
@@ -546,7 +413,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				7B4D35271819A1DC00664C4A /* PBXTargetDependency */,
 			);
 			name = ACEVIewExample;
 			productName = "ACE View Example";
@@ -574,8 +440,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 7B644CFA181649FB0036D205 /* Products */;
-					ProjectRef = 7B644CF9181649FB0036D205 /* KFURLBar.xcodeproj */;
+					ProductGroup = 7BB2B662181A47190078A9C1 /* Products */;
+					ProjectRef = 7BB2B661181A47190078A9C1 /* KFURLBar.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -590,18 +456,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		7B644CFE181649FB0036D205 /* KFURLBarDemo.app */ = {
+		7BB2B667181A47190078A9C1 /* KFURLBarDemo.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = KFURLBarDemo.app;
-			remoteRef = 7B644CFD181649FB0036D205 /* PBXContainerItemProxy */;
+			remoteRef = 7BB2B666181A47190078A9C1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		7B69965D1819539C00CAD9E2 /* libKFURLBar.a */ = {
+		7BB2B669181A47190078A9C1 /* libKFURLBar.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libKFURLBar.a;
-			remoteRef = 7B69965C1819539C00CAD9E2 /* PBXContainerItemProxy */;
+			remoteRef = 7BB2B668181A47190078A9C1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -620,8 +486,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C8A72E815EA0F0E007E5EB8 /* InfoPlist.strings in Resources */,
-				7C8A72EE15EA0F0E007E5EB8 /* Credits.rtf in Resources */,
 				36F169F916B9375D00E8965C /* MainMenu.xib in Resources */,
 				7C8A72FA15EA0FCB007E5EB8 /* HTML5.html in Resources */,
 			);
@@ -680,12 +544,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C9B66BE166AF49F00A24CB7 /* ACEView.m in Sources */,
-				7C9B66C7166AF4F600A24CB7 /* ACELogger.m in Sources */,
-				7B4D35341819A74000664C4A /* ACEModeArrays.m in Sources */,
-				7C86C825166B47AF00AE3A57 /* ACEModeNames.m in Sources */,
-				7C86C82B166B507A00AE3A57 /* ACEThemeNames.m in Sources */,
 				7C86C852166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m in Sources */,
-				7B644D0F18164AEA0036D205 /* ACEBrowserView.m in Sources */,
+				7B8C888B181A124400A43EE4 /* ACEBrowserView.m in Sources */,
 				7C08C07C1672ED23000D4A97 /* NSInvocation+MainThread.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,11 +562,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7B4D35271819A1DC00664C4A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7B69966E1819605C00CAD9E2 /* UpdateAce */;
-			targetProxy = 7B4D35261819A1DC00664C4A /* PBXContainerItemProxy */;
-		};
 		7B4D352E1819A2F100664C4A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7B69966E1819605C00CAD9E2 /* UpdateAce */;
@@ -717,10 +572,10 @@
 			target = 7C8A728B15EA0769007E5EB8 /* ACEView */;
 			targetProxy = 7B4D352F1819A2FB00664C4A /* PBXContainerItemProxy */;
 		};
-		7B6996591819539C00CAD9E2 /* PBXTargetDependency */ = {
+		7BB2B66B181A471E0078A9C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KFURLBar;
-			targetProxy = 7B6996581819539C00CAD9E2 /* PBXContainerItemProxy */;
+			targetProxy = 7BB2B66A181A471E0078A9C1 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -739,22 +594,6 @@
 				36F169F716B9374200E8965C /* en */,
 			);
 			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		7C8A72E615EA0F0E007E5EB8 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7C8A72E715EA0F0E007E5EB8 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		7C8A72EC15EA0F0E007E5EB8 /* Credits.rtf */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7C8A72ED15EA0F0E007E5EB8 /* en */,
-			);
-			name = Credits.rtf;
 			sourceTree = "<group>";
 		};
 		7CAF0CFE15EBAA7C00161329 /* InfoPlist.strings */ = {

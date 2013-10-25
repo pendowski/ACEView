@@ -11,5 +11,6 @@
 @interface NSString (EscapeForJavaScript)
 
 - (NSString *) stringByEscapingForJavaScript;
-
+- (NSString*) evaluateStringWithStringOrFile:(id)script;
+- (NSString*)stringByPaddingTheLeftToLength:(NSUInteger)newLength;
 @end

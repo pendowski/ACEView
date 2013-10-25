@@ -11,10 +11,10 @@
 #import <ACEView/ACEView.h>
 #import <KFURLBar/KFURLBar.h>
 #import "KFURLBar/KFWebKitProgressController.h"
+//ACEViewDelegate
 
-@interface ACEBrowserView : NSView <KFURLBarDelegate, NSWindowDelegate, 
-												KFWebKitProgressDelegate, 
-												ACEViewDelegate, NSPopoverDelegate>
+@interface ACEBrowserView : NSView <KFURLBarDelegate, NSWindowDelegate,
+												KFWebKitProgressDelegate,  NSPopoverDelegate>
 
 @property (nonatomic)			   CGFloat 	 urlBarHeight;
 //@property (readonly) NSViewController *vc;
@@ -29,8 +29,8 @@
 
 @property 	        (strong)       ACEView * aceView;
 @property        (nonatomic)         float   progress;
-@property        (nonatomic)       ACEMode   mode;
-@property        (nonatomic)      ACETheme   theme;
+//@property        (nonatomic)       ACEMode   mode;
+//@property        (nonatomic)      ACETheme   theme;
 
 @property (nonatomic, weak) NSString *HTMLString, *URLString;
 

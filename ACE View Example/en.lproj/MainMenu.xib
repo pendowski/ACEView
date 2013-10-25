@@ -685,9 +685,6 @@
                                             <font key="font" metaFont="miniSystem"/>
                                             <menu key="menu" title="OtherViews" id="592"/>
                                         </popUpButtonCell>
-                                        <connections>
-                                            <action selector="themeChanged:" target="494" id="622"/>
-                                        </connections>
                                     </popUpButton>
                                     <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" id="557">
                                         <rect key="frame" x="102" y="283" width="97" height="15"/>
@@ -697,9 +694,6 @@
                                             <font key="font" metaFont="miniSystem"/>
                                             <menu key="menu" title="OtherViews" id="559"/>
                                         </popUpButtonCell>
-                                        <connections>
-                                            <action selector="syntaxModeChanged:" target="494" id="586"/>
-                                        </connections>
                                     </popUpButton>
                                     <customView id="536" customClass="ACEView">
                                         <rect key="frame" x="0.0" y="0.0" width="480" height="275"/>
@@ -728,8 +722,9 @@
         <customObject id="494" customClass="ACEViewAppDelegate">
             <connections>
                 <outlet property="aceView" destination="536" id="623"/>
-                <outlet property="syntaxMode" destination="557" id="585"/>
-                <outlet property="theme" destination="587" id="621"/>
+                <outlet property="browserView" destination="aJx-bc-2Dn" id="jAb-qX-GTk"/>
+                <outlet property="syntax" destination="557" id="adC-pg-9If"/>
+                <outlet property="themes" destination="587" id="tVV-oW-CcE"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>

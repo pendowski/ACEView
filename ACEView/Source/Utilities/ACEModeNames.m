@@ -110,7 +110,12 @@ NSString *const _ACEModeNamesHuman[ACEModeCount] = {
 };
 */
 
-@implementation ACEModeNames
+@implementation ACEModeNameTransformer 
++ (BOOL) allowsReverseTransformation 	{ return YES; } + (Class) transformedValueClass { return NSString.class;	 }
+-   (id) transformedValue:		   (id)v { return [ACEModeNames nameForMode:0]; } //[v selectionIndexes]]; 					 }
+-   (id) reverseTransformedValue:(id)v { return [NSNumber numberWithUnsignedInteger:[ACEModeNames modeForName:v]]; }	@end
+
+@implementation ACEModes
 
 + (NSArray *) modeNames {
     return [NSArray arrayWithObjects:_ACEModeNames count:ACEModeCount];
@@ -119,6 +124,10 @@ NSString *const _ACEModeNamesHuman[ACEModeCount] = {
     return [NSArray arrayWithObjects:_ACEModeNamesHuman count:ACEModeCount];
 }
 
++ (ACEMode)modeForName:(NSString*)name {
+	return  [self.humanModeNames containsObject:name] ?  [self.humanModeNames indexOfObject:name] :
+				[self.modeNames containsObject:name] ?  [self.modeNames indexOfObject:name] : NSNotFound;
+}
 + (NSString *) nameForMode:(ACEMode)mode  {
     return _ACEModeNames[mode];
 }

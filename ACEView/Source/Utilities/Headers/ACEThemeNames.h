@@ -14,7 +14,7 @@
 
  */
 
-@interface ACEThemeNames : NSObject { }
+@interface ACEThemes : NSObject { }
 
 /**---------------------------------------------------------------------------------------
  * @name Class Methods

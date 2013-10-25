@@ -1,7 +1,7 @@
 
 #import "ACEBrowserView.h"
-#import "ACEModeNames.h"
-#import "ACEThemeNames.h"
+//#import "ACEModeNames.h"
+//#import "ACEThemeNames.h"
 #import <objc/message.h>
 
 typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
@@ -87,11 +87,11 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 	_aceView.autoresizingMask 	= NSViewWidthSizable|NSViewHeightSizable;
 	[_urlBar bind:@"addressString" toObject:_webView withKeyPath:@"mainFrameURL" options:nil];
 //	[_webView bind:@"mainFrameURL" toObject:_aceView withKeyPath:@"mainFrameURL" options:nil];
-	_aceView.delegate 			= self; 
+//	_aceView.delegate 			= self; 
 
 	[self addSubview:_split];
-	_aceView.mode					= ACEModeHTML;
-	_aceView.theme 				= ACEThemeMonokai;
+//	_aceView.mode					= ACEModeHTML;
+//	_aceView.theme 				= ACEThemeMonokai;
 	_aceView. showPrintMargin 	= NO; 
 	_aceView.showInvisibles		= YES;
 	
@@ -200,7 +200,8 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 		NSViewController *modeVC = NSViewController.new;
 		NSRect base 				 = (NSRect){0,0,100,300};
 		NSScrollView *sv			 = [NSScrollView.alloc initWithFrame:base];
-		base.size.height 			 = 12 * ACEModeNames.humanModeNames.count;
+		base.size.height 			 = 12 * [self.aceView.modes.arrangedObjects count];
+		// ACEModeNames.humanModeNames.count;
 		sv.documentView			 = tv = [NSTableView.alloc initWithFrame:base];
 		sv.hasVerticalScroller	 = YES;
 		sv.drawsBackground 		 = NO;
@@ -210,9 +211,9 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 		c.dataCell 					 = cell = NSTextFieldCell.new;
 		[cell setFont:[NSFont fontWithName:@"UbuntuMono-Bold" size:14.0]];
 		[cell setTextColor:NSColor.whiteColor];
-		[c 	bind:@"value" toObject:	
-				[NSArrayController.alloc initWithContent: ACEModeNames.humanModeNames] 			
-				withKeyPath:@"arrangedObjects" options:nil];
+//		[c 	bind:@"value" toObject:	
+//				[NSArrayController.alloc initWithContent: ACEModeNames.humanModeNames] 			
+//				withKeyPath:@"arrangedObjects" options:nil];
 		modeVC.view = sv;
 //		[tv setTarget:_aceView];
 //		[tv setAction:@selector(setMode:)];
@@ -223,9 +224,9 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 		_modePop.animates = YES;
 	// AppKit will close the popover when the user interacts with a user interface element outside the popover. note that interacting with menus or panels that become key only when needed will not cause a transient popover to close.
 		_modePop.behavior = NSPopoverBehaviorTransient;
-		tv.actionBlock = ^(id sendo) { 			NSUInteger idx = [sendo selectedRow];
-			[self.aceView setMode:idx];
-												 NSLog(@"selected:%ld", idx);_aceView.mode = idx; 
+		tv.actionBlock = ^(id sendo) { 		//	NSUInteger idx = [sendo selectedRow];
+//			[self.aceView setMode:idx];
+//												 NSLog(@"selected:%ld", idx);_aceView.mode = idx; 
 			[_modePop close];
 		};
 		// so we can be notified when the popover appears or closes

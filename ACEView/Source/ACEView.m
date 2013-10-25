@@ -1,85 +1,68 @@
-//
-//  ACEView.m
-//  ACEView
-//
-//  Created by Michael Robinson on 26/08/12.
-//  Copyright (c) 2012 Code of Interest. All rights reserved.
-//
 
 #import "ACEView.h"
-#import "ACEModeNames.h"
-#import "ACEThemeNames.h"
 #import "ACERange.h"
 #import "ACEStringFromBool.h"
 #import "NSString+EscapeForJavaScript.h"
 #import "NSInvocation+MainThread.h"
 
-#define ACE_JAVASCRIPT_DIRECTORY @"___ACE_VIEW_JAVASCRIPT_DIRECTORY___"
+@implementation  ACEMode																												@end
+@implementation  ACETheme																											@end
+@implementation  ACESetting
++ (instancetype) settingNamed:(NSString*)n jsFormat:(NSString*)fmt, ... {
+	id x = self.new; [(ACESetting*)x setName:n]; va_list args;	va_start(args, fmt);
+	[x setJs:[NSString.alloc initWithFormat:fmt arguments:args]];
+	va_end(args);
+	return x;
+} @end
 
-#pragma mark - ACEViewDelegate
-NSString *const ACETextDidEndEditingNotification = @"ACETextDidEndEditingNotification";
-#pragma mark - ACEView private
-static NSArray *allowedSelectorNamesForJavaScript;
+static			     NSArray * allowedSelectorNamesForJavaScript;
 
 @interface ACEView()
+@property NSTextFinder *textFinder;
 - (NSString *) stringByEvaluatingJavaScriptOnMainThreadFromString:(NSString *)script;
 - (void) executeScriptsWhenLoaded:(NSArray *)scripts;
 - (void) executeScriptWhenLoaded:(NSString *)script;
 - (void) resizeWebView;
-- (void) showFindInterface;
-- (void) showReplaceInterface;
 + (NSArray*) allowedSelectorNamesForJavaScript;
 - (void) aceTextDidChange;
 @end
 
-#pragma mark - ACEView implementation
 @implementation ACEView
 
-#pragma mark - Internal
-- (id) initWithFrame:(NSRect)frame {
-	
-	if (self != [super initWithFrame:frame]) return nil;
-	_webView = WebView.new;
-	_webView.frameLoadDelegate = self;
-	return self;
+- (NSString*)aceDirectory { return  [[NSBundle bundleForClass:self.class].resourcePath stringByAppendingPathComponent:@"src"]; }
+
+- (void) loadAce { 	[self addSubview:_webView = WebView.new]; _webView.frameLoadDelegate = self;
+
+	NSString *htmlPath = [[NSBundle bundleForClass:self.class] pathForResource:@"index" ofType:@"html"];
+	[_webView.mainFrame loadHTMLString: [[NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil]
+									stringByReplacingOccurrencesOfString:ACE_JAVASCRIPT_DIRECTORY withString:self.aceDirectory] baseURL:[NSBundle bundleForClass:self.class].bundleURL];
+	[self setFont:nil];
+	[self resizeWebView];
 }
 
+- (id) superViewOfView:(id)v ofClass:(Class)k { id x; if (!(x = [v superview])) return nil; else if ([x isKindOfClass:k]) return x; else return  [self superViewOfView:x ofClass:k]; }
+
 - (void) viewDidMoveToWindow {
-	[self addSubview:_webView];
-	self.borderType 					= NSNoBorder;
-	[self resizeWebView];
-	_textFinder			 			= NSTextFinder.new;
-	_textFinder.client				=	self;
-	_textFinder.findBarContainer = self;
-	
-	NSBundle *bundle = [NSBundle bundleForClass:self.class];
-	
-	// Unable to use pretty resource paths with CocoaPods
-	//	NSString *javascriptDirectory = [[bundle pathForResource:@"ace" ofType:@"js" inDirectory:@"ace/javascript"] stringByDeletingLastPathComponent];
-	NSString *javascriptDirectory = [[bundle resourcePath]stringByAppendingPathComponent:@"src"];
-	//:@"ace" ofType:@"js"] stringByDeletingLastPathComponent];
-	
-	
-	// Unable to use pretty resource paths with CocoaPods
-	//	NSString *htmlPath = [bundle pathForResource:@"index" ofType:@"html" inDirectory:@"ace"];
-	NSString *htmlPath = [bundle pathForResource:@"index" ofType:@"html"];
-	NSString *html = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
-	html = [html stringByReplacingOccurrencesOfString:ACE_JAVASCRIPT_DIRECTORY withString:javascriptDirectory];
-	[_webView.mainFrame loadHTMLString:html baseURL:[bundle bundleURL]];
-	
+
+	self.borderType								= NSNoBorder;
+	self.hasHorizontalScroller		= NO;
+	_textFinder										= NSTextFinder.new;
+	_textFinder.client						=	self;
+	_textFinder.findBarContainer	= self;
+	[self loadAce];
+	ACEBrowserView *x = [self superViewOfView:self ofClass:ACEBrowserView.class];
+	if (x) {	NSLog(@"found %@", x);
+		[x.webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://google.com" ]]];
+		x.split.vertical = YES;
+	}
 }
 + (BOOL) isSelectorExcludedFromWebScript:(SEL)aSelector {
-	return ![[ACEView allowedSelectorNamesForJavaScript] containsObject:NSStringFromSelector(aSelector)];
+	return ![ACEView.allowedSelectorNamesForJavaScript containsObject:NSStringFromSelector(aSelector)];
 }
 
 #pragma mark - NSView overrides
-- (void) drawRect:(NSRect)dirtyRect {
-	[self resizeWebView];
-	[super drawRect:dirtyRect];
-}
-- (void) resizeSubviewsWithOldSize:(NSSize)oldSize {
-	[self resizeWebView];
-}
+- (void) drawRect:						(NSRect)dirtyRect { [self resizeWebView]; [super drawRect:dirtyRect]; }
+- (void) resizeSubviewsWithOldSize:	(NSSize)oldSize 	{ [self resizeWebView]; 									 }
 
 #pragma mark - WebView delegate methods
 - (void) webView:(WebView*)w didFinishLoadForFrame:(WebFrame *)f{ [_webView.windowScriptObject setValue:self forKey:@"ACEView"]; }
@@ -115,7 +98,7 @@ static NSArray *allowedSelectorNamesForJavaScript;
 }
 - (void) executeScriptsWhenLoaded:(NSArray *)scripts {
 
-	if (_webView.isLoading) return [self performSelector:@selector(executeScriptsWhenLoaded:) withObject:scripts afterDelay:1];
+	if (_webView.isLoading) return [self performSelector:@selector(executeScriptsWhenLoaded:) withObject:scripts afterDelay:.2];
 	[scripts enumerateObjectsUsingBlock:^(id script, NSUInteger index, BOOL *stop) { [_webView stringByEvaluatingJavaScriptFromString:script]; }];
 }
 - (void) executeScriptWhenLoaded:(NSString *)script { 	[self executeScriptsWhenLoaded:@[script]]; }
@@ -137,13 +120,11 @@ static NSArray *allowedSelectorNamesForJavaScript;
 + (NSArray *) allowedSelectorNamesForJavaScript {
 	
 	allowedSelectorNamesForJavaScript  = allowedSelectorNamesForJavaScript  ?: @[ @"showFindInterface", @"showReplaceInterface", @"aceTextDidChange" ];
-	return [allowedSelectorNamesForJavaScript retain];
+	return allowedSelectorNamesForJavaScript;// retain];
 }
 
 - (void) aceTextDidChange { NSNotification *note;
-	[NSNotificationCenter.defaultCenter postNotification:note = [NSNotification notificationWithName:ACETextDidEndEditingNotification object:self]];	
-	if (self.delegate && [self.delegate respondsToSelector:@selector(textDidChange:)])  
-		[self.delegate performSelector:@selector(textDidChange:) withObject:note];
+	[NSNotificationCenter.defaultCenter postNotification:note = [NSNotification notificationWithName:ACETextDidEndEditingNotification object:self]];
 }
 
 #pragma mark - Public
@@ -157,14 +138,79 @@ static NSArray *allowedSelectorNamesForJavaScript;
 												@"reportChanges = true;",
 												@"ACEView.aceTextDidChange();"]];
 }
+@synthesize themes = _themes, modes = _modes, webView = _webView;
 
+- (NSArrayController*) modes	{ return _modes  ?: ^{ _modes = NSArrayController.new;
+
+	NSString *cmd, *file, *parse;
+ 	cmd = @"Object.keys(supportedModes);",
+	file = [self.aceDirectory stringByAppendingPathComponent:@"ext-modelist.js"],
+	parse =  [[NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil]
+							 stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+									  
+	NSRange firstInstance = [parse rangeOfString:@"var supportedModes"];
+	parse = [parse substringFromIndex:firstInstance.location];
+	NSRange closingBrace = [parse rangeOfString:@"};"];
+	parse = [parse substringWithRange:NSMakeRange(0,closingBrace.location + 2)];
+	NSArray *humanReadables = [[cmd evaluateStringWithStringOrFile:parse] componentsSeparatedByString:@","];
+	NSString*(^getShorty)(NSString *) = ^NSString*(NSString *key) {
+
+		NSString *res = [[NSString stringWithFormat:@"supportedModes.%@;", key] evaluateStringWithStringOrFile:parse];
+		NSRange r = [res rangeOfString:@"|"];
+		return [res substringToIndex:r.location == NSNotFound ? res.length : r.location];
+	};
+
+	[humanReadables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+		ACEMode *m = ACEMode.new;
+		m.name = obj;
+		m.js = [NSString stringWithFormat:@"editor.getSession().setMode('ace/mode/%@');", getShorty(obj)];
+		[_modes addObject:m];
+	}];
+	[_modes addObserver:self forKeyPath:@"selectionIndex" options:nil context:NULL];
+	return _modes;
+}();	}
+- (NSArrayController*) themes { return _themes ?: ^{ _themes = NSArrayController.new;
+
+		NSString *cmd 	= @"themes;", 
+					*file = [self.aceDirectory stringByAppendingPathComponent:@"ext-themelist.js"],
+			  *parsable =  [[NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil]
+									  stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+									  
+		NSRange firstInstance = [parsable rangeOfString:@"themes = ["];
+		parsable = [parsable substringFromIndex:firstInstance.location];
+		NSRange closingBrace = [parsable rangeOfString:@"];"];
+		parsable = [parsable substringWithRange:NSMakeRange(0,closingBrace.location + 2)];
+		NSLog(@"pparsabe:%@", parsable);
+		NSArray *humanReadables = [[cmd evaluateStringWithStringOrFile:parsable]componentsSeparatedByString:@","];
+		[humanReadables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+			ACETheme *m = ACETheme.new;
+			m.name = obj;
+			m.js = [NSString stringWithFormat:@"editor.setTheme('ace/theme/%@')", obj];
+			[_themes addObject:m];
+		}];
+		[_themes addObserver:self forKeyPath:@"selectionIndex" options:nil context:NULL];
+		return _themes;
+	}();	}
+
+
+- (void) observeValueForKeyPath:(NSString*)kp ofObject:(id)x change:(NSDictionary*)c context:(void *)ctx {
+	NSLog(@"obj:%@, kp:%@, ch:%@", x, kp, c);
+	NSString *theJS = 
+	x == _modes 	? [_modes.selectedObjects[0]  js] :
+	x == _themes 	? [_themes.selectedObjects[0] js] : nil;
+	if (theJS) {  NSLog(@"theJS: %@", theJS); [self executeScriptWhenLoaded:theJS]; }
+	else  [super observeValueForKeyPath:kp ofObject:x change:c context:ctx];
+}
 #define SETIT(x) _##x = x
-- (void) setMode:(ACEMode)mode {  SETIT(mode);
-	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.getSession().setMode(\"ace/mode/%@\");", [ACEModeNames nameForMode:mode]]];
+- (void) setFont:(NSString*)name {
+	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"document.getElementById('editor').style.fontFamily = 'UbuntuMono-Bold';"]];
 }
-- (void) setTheme:(ACETheme)theme { SETIT(theme);
-	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setTheme(\"ace/theme/%@\");", [ACEThemeNames nameForTheme:theme]]];
-}
+//- (void) setMode:(ACEMode)mode {  SETIT(mode);
+//	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.getSession().setMode(\"ace/mode/%@\");", [ACEModeNames nameForMode:mode]]];
+//}
+//- (void) setTheme:(ACETheme)theme { SETIT(theme);
+//	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setTheme(\"ace/theme/%@\");", [ACEThemeNames nameForTheme:theme]]];
+//}
 
 - (void) setWrappingBehavioursEnabled:(BOOL)wrap { _wrappingBehavioursEnabled = wrap;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setWrapBehavioursEnabled(%@);", ACEStringFromBool(wrap)]];
@@ -218,3 +264,40 @@ static NSArray *allowedSelectorNamesForJavaScript;
 }
 
 @end
+
+//- (NSArrayController*) modes { return _modes ?:
+//	[_modes = NSArrayController.new setContent:ACEModeNames.humanModeNames],
+//	[_modes addObserver:self forKeyPath:@"selectionIndex" options:nil context:NULL], _modes;
+//}
+
+//  ACEView.m
+//  ACEView
+//  Created by Michael Robinson on 26/08/12.
+//  Copyright (c) 2012 Code of Interest. All rights reserved.
+//#import "ACEModeNames.h"
+//#import "ACEThemeNames.h"
+
+//#pragma mark - Internal
+//- (id) initWithFrame:(NSRect)frame {
+//
+//	if (self != [super initWithFrame:frame]) return nil;
+//	return self;
+//}
+#pragma mark - ACEViewDelegate
+//NSString *const ACETextDidEndEditingNotification = @"ACETextDidEndEditingNotification";
+#pragma mark - ACEView private
+//	if (self.delegate && [self.delegate respondsToSelector:@selector(textDidChange:)])
+//		[self.delegate performSelector:@selector(textDidChange:) withObject:note];
+// Unable to use pretty resource paths with CocoaPods
+//	NSString *javascriptDirectory = [[bundle pathForResource:@"ace" ofType:@"js" inDirectory:@"ace/javascript"] stringByDeletingLastPathComponent];
+//:@"ace" ofType:@"js"] stringByDeletingLastPathComponent];
+
+
+// Unable to use pretty resource paths with CocoaPods
+//	NSString *htmlPath = [bundle pathForResource:@"index" ofType:@"html" inDirectory:@"ace"];
+//_webView.postsBoundsChangedNotifications	= YES;
+//[NSNotificationCenter.defaultCenter addObserverForName:NSViewBoundsDidChangeNotification
+//																								object:_webView queue:NSOperationQueue.mainQueue
+//																						usingBlock:^(NSNotification *note) {
+//																							[_webView setNeedsDisplay:YES];
+//																						}];

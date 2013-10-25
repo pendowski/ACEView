@@ -4,5 +4,8 @@
 
 #ifdef __OBJC__
     #import "Cocoa/Cocoa.h"
-    #import "ACEView/ACELogger.h"
+	#import "JavaScriptCore/JavaScriptCore.h"
+//    #import "ACEView/ACELogger.h"
+
+NS_INLINE NSString *ACEStringFromBool(BOOL flag) {	return flag ? @"true" : @"false"; }
 #endif
