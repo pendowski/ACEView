@@ -1,7 +1,7 @@
 
 #import "ACEView.h"
 #import "ACERange.h"
-#import "ACEStringFromBool.h"
+//#import "ACEStringFromBool.h"
 #import "NSString+EscapeForJavaScript.h"
 #import "NSInvocation+MainThread.h"
 
