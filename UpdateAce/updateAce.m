@@ -3,19 +3,7 @@
 //  UpdateAce
 //
 //  Created by Alex Gray on 10/24/13.
-//  Copyright (c) 2013 Code of Interest. All rights reserved.
-//
-
-#import <Foundation/Foundation.h>
-#import <Cocoa/Cocoa.h>
-#import <JavaScriptCore/JavaScriptCore.h>
-
-NSString *stringByPaddingTheLeftToLength(NSString *self, NSUInteger newLength) {
-	for (int i = 0; i < self.length - newLength; i++) self = [NSString stringWithFormat:@" %@", self]; return self;
-}
-
-NSString *evaluateStringWithStringOrFile(NSString *command, id script){ JSStringRef resultStringJS; CFStringRef resultString; NSError *e; 
-
+//  Copyright (c) 2013 Code of Interest. All rights  
 	NSString *theScript =
 		([script isKindOfClass:NSString.class] || [script isKindOfClass:NSURL.class]) 
 	&& [NSFileManager.defaultManager fileExistsAtPath:[script isKindOfClass:NSURL.class] ? [script path] : script isDirectory:NULL] 

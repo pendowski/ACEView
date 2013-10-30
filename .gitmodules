@@ -1,3 +1,6 @@
 [submodule "KFURLBar"]
 	path = KFURLBar
 	url = https://github.com/mralexgray/KFURLBar.git
+[submodule "ace"]
+	path = ace
+	url = https://github.com/ajaxorg/ace
