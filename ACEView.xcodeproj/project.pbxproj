@@ -38,6 +38,8 @@
 		7B8C888A181A113A00A43EE4 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B69967E18196A0F00CAD9E2 /* JavaScriptCore.framework */; };
 		7B8C888B181A124400A43EE4 /* ACEBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B644D0D18164AEA0036D205 /* ACEBrowserView.m */; };
 		7BB2B66C181A473C0078A9C1 /* libKFURLBar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB2B669181A47190078A9C1 /* libKFURLBar.a */; };
+		7BF6DBA7181C5D64007B9A63 /* ACELanguageDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF6DBA5181C5D64007B9A63 /* ACELanguageDetector.h */; };
+		7BF6DBA8181C5D64007B9A63 /* ACELanguageDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF6DBA6181C5D64007B9A63 /* ACELanguageDetector.m */; };
 		7C08C07C1672ED23000D4A97 /* NSInvocation+MainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */; };
 		7C08C07E1672ED30000D4A97 /* NSInvocation+MainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */; };
 		7C86C84E166F184D00AE3A57 /* ACERange.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C86C84D166F184C00AE3A57 /* ACERange.h */; };
@@ -134,6 +136,9 @@
 		7B6996731819605C00CAD9E2 /* updateAce.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = updateAce.m; path = ../UpdateAce/updateAce.m; sourceTree = "<group>"; };
 		7B69967E18196A0F00CAD9E2 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		7BB2B661181A47190078A9C1 /* KFURLBar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KFURLBar.xcodeproj; path = KFURLBar/KFURLBar.xcodeproj; sourceTree = "<group>"; };
+		7BF6DBA3181C5D0F007B9A63 /* jsdetector.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = jsdetector.js; path = ACEView/jsdetector.js; sourceTree = "<group>"; };
+		7BF6DBA5181C5D64007B9A63 /* ACELanguageDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACELanguageDetector.h; path = ACEView/Source/Utilities/ACELanguageDetector.h; sourceTree = "<group>"; };
+		7BF6DBA6181C5D64007B9A63 /* ACELanguageDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACELanguageDetector.m; path = ACEView/Source/Utilities/ACELanguageDetector.m; sourceTree = "<group>"; };
 		7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+MainThread.m"; path = "ACEView/Source/Categories/NSInvocation+MainThread.m"; sourceTree = "<group>"; };
 		7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+MainThread.h"; path = "ACEView/Source/Categories/Headers/NSInvocation+MainThread.h"; sourceTree = "<group>"; };
 		7C86C84D166F184C00AE3A57 /* ACERange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACERange.h; path = ACEView/Source/Utilities/Headers/ACERange.h; sourceTree = "<group>"; };
@@ -228,7 +233,7 @@
 		7BB2B662181A47190078A9C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7BB2B667181A47190078A9C1 /* KFURLBarDemo.app */,
+				7BB2B667181A47190078A9C1 /* KFURLBar.app */,
 				7BB2B669181A47190078A9C1 /* libKFURLBar.a */,
 			);
 			name = Products;
@@ -246,6 +251,9 @@
 				7C86C84D166F184C00AE3A57 /* ACERange.h */,
 				7C9B66C1166AF4C600A24CB7 /* ACEView.h */,
 				7C9B66BC166AF49F00A24CB7 /* ACEView.m */,
+				7BF6DBA3181C5D0F007B9A63 /* jsdetector.js */,
+				7BF6DBA5181C5D64007B9A63 /* ACELanguageDetector.h */,
+				7BF6DBA6181C5D64007B9A63 /* ACELanguageDetector.m */,
 				7C9B5F12166AEB9700A24CB7 /* index.html */,
 				7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */,
 				7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */,
@@ -338,6 +346,7 @@
 				7C9B66C2166AF4C600A24CB7 /* ACEView.h in Headers */,
 				7C9B66C5166AF4E900A24CB7 /* ACELogger.h in Headers */,
 				7C86C84E166F184D00AE3A57 /* ACERange.h in Headers */,
+				7BF6DBA7181C5D64007B9A63 /* ACELanguageDetector.h in Headers */,
 				7C86C854166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h in Headers */,
 				7B644D0E18164AEA0036D205 /* ACEBrowserView.h in Headers */,
 				7C08C07E1672ED30000D4A97 /* NSInvocation+MainThread.h in Headers */,
@@ -456,9 +465,10 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		7BB2B667181A47190078A9C1 /* KFURLBarDemo.app */ = {
+		7BB2B667181A47190078A9C1 /* KFURLBar.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
+			name = KFURLBar.app;
 			path = KFURLBarDemo.app;
 			remoteRef = 7BB2B666181A47190078A9C1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -547,6 +557,7 @@
 				7C86C852166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m in Sources */,
 				7B8C888B181A124400A43EE4 /* ACEBrowserView.m in Sources */,
 				7C08C07C1672ED23000D4A97 /* NSInvocation+MainThread.m in Sources */,
+				7BF6DBA8181C5D64007B9A63 /* ACELanguageDetector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
