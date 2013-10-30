@@ -10,7 +10,11 @@
 
 @interface NSString (EscapeForJavaScript)
 
-- (NSString *) stringByEscapingForJavaScript;
+- (NSString*) stringByEscapingForJavaScript;
 - (NSString*) evaluateStringWithStringOrFile:(id)script;
-- (NSString*)stringByPaddingTheLeftToLength:(NSUInteger)newLength;
+- (NSString*) stringByPaddingTheLeftToLength:(NSUInteger)newLength;
+@end
+
+@interface NSInvocation (MainThread)
+- (void)invokeOnMainThread;
 @end

@@ -54,6 +54,14 @@
 													 JSGlobalContextRelease(ctx);										// Release JavaScript execution context.
 	return (__bridge NSString*)resultString;																// Return result.
 }
+@end
 
+
+
+@implementation NSInvocation (MainThread)
+
+- (void) invokeOnMainThread {
+    [self performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self.target waitUntilDone:YES];
+}
 
 @end
