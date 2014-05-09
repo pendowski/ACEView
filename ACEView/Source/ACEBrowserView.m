@@ -1,52 +1,46 @@
 
+@import WebKit;
+@import ObjectiveC;
+#import "ACEView.h"
 #import "ACEBrowserView.h"
-//#import "ACEModeNames.h"
-//#import "ACEThemeNames.h"
-#import <objc/message.h>
 
-typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
-- (NSControlActionBlock) actionBlock;
-- (void)setActionBlock:(NSControlActionBlock)ab;
-
-@end
-
-#import <objc/runtime.h>
+typedef void(^ControlBlock)(NSControl*x);
 
 @implementation NSControl (Block)
+- (ControlBlock) actionBlock              { return  objc_getAssociatedObject(self, _cmd); }
+- (void) setActionBlock:(ControlBlock)ab  {
 
-- (void) trampoline { 
-	if (self.actionBlock && self.target == self) self.actionBlock(self);
-	else if (self.action && self.target) objc_msgSend (self.target,self.action,self);
+	objc_setAssociatedObject(self,    @selector(actionBlock),ab,OBJC_ASSOCIATION_COPY);
+	self.target = self;	self.action = @selector(trampoline);
 }
-- (NSControlActionBlock) actionBlock { return  objc_getAssociatedObject(self, _cmd); }
+- (void) trampoline                       {
 
-- (void)setActionBlock:(NSControlActionBlock)ab {  
-	objc_setAssociatedObject(self, @selector(actionBlock),ab,OBJC_ASSOCIATION_COPY);
-	self.target = self;
-	self.action = @selector(trampoline);
+  self.actionBlock && self.target == self ? self.actionBlock(self) :
+  self.action      && self.target ? objc_msgSend (self.target,self.action,self) : nil;
 }
 @end
 
-
-
-@interface  		    ACEBrowserView( )
-- (void) showAlert:(id)sender;
-- (void) reloadURL:(id)sender;
-//- (void) showPopoverAction:(id)sender;
+@interface ACEBrowserView() <KFWebKitProgressDelegate, NSWindowDelegate, NSPopoverDelegate>
 @property KFWebKitProgressController * controller;
-@property (readonly) 		NSPopover * myPopover;
+@property (readonly) 		   NSPopover * myPopover;
 @end
 
 @implementation ACEBrowserView
 
 //-   (id) valueForUndefinedKey:(NSString*)key 	{ return  [_webView valueForKey:key];	}
-- (void) setHTMLString:(NSString*)HTMLString 	{ [self.aceView setStringValue:HTMLString]; }
+- (void)   setHTMLString:(NSString*)HTMLString 	{ [self.aceView setStringValue:HTMLString]; }
 - (void) setUrlBarHeight:(CGFloat)urlBarHeight 	{ _urlBarHeight = urlBarHeight;
 
 	NSRect urlBox = (NSRect){ 0, self.bounds.size.height - _urlBarHeight, self.bounds.size.width, _urlBarHeight};
-	if (_urlBar) _urlBar.frame = urlBox; else {
-		[self addSubview:_urlBar = [KFURLBar.alloc initWithFrame:urlBox]];
-		[(_controller = KFWebKitProgressController.new) setDelegate:(id)(_urlBar.delegate = self)];
+	if (_urlBar) _urlBar.frame = urlBox;
+  else {
+		[self addSubview:_urlBar = [KFURLBar instanceWithRequestBlock:^(NSString *req) {
+        self.mainFrameURL  = req;
+        //	[_webView.mainFrame loadRequest:[NSURLRequest.alloc initWithURL:url]];
+        _urlBar.progressPhase = KFProgPending;
+    }]];
+    _urlBar.frame = urlBox;
+		[_controller = KFWebKitProgressController.new setDelegate:(id)self];
 		for (id x in @[@"policyDelegate", @"frameLoadDelegate", @"downloadDelegate",@"resourceLoadDelegate",@"UIDelegate"])
 			[_webView setValue:_controller forKey:x];
 		_urlBar.autoresizingMask = NSViewWidthSizable|NSViewMinYMargin;
@@ -55,39 +49,45 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 	}
 }
 
-- (void) awakeFromNib { // self.window.delegate = self.window.delegate ?: self;
-	
-	self.urlBarHeight 	= 40;
+- (void) awakeFromNib { self.window.delegate = self.window.delegate ?: self; }
+
+//- (id) initWithCoder:(NSCoder*)d { return [self initWithFrame:NSZeroRect]; }
+
+//  if (!(self = [super initWithFrame:r])) return nil;
+- (id) initWithFrame:(NSRect)r   {
+
+  if (!(self = [super initWithFrame:r])) return nil;
+
+  self.urlBarHeight 	= 40;
 	
 	for (id b in @[@"reloadB", @"alertB",@"modeB", @"themeB"]) { NSButton*butt; 
 		
-		[self setValue:									 butt = NSButton.new forKey:b];
-		butt.bezelStyle										 	= NSInlineBezelStyle;
-		butt.translatesAutoresizingMaskIntoConstraints 	= NO;
-//		butt.title 													= b;
-//		[[butt cell] setBackgroundStyle:						  NSBackgroundStyleRaised];
+    [butt = NSButton.new setValuesForKeysWithDictionary:@{ @"bezelStyle": @(NSInlineBezelStyle),
+                            @"translatesAutoresizingMaskIntoConstraints":@NO}];
+    [self setValue:butt  forKey:b];
+//		butt.title = b; [[butt cell] setBackgroundStyle: NSBackgroundStyleRaised];
 	}
 	
-	 __block ACEBrowserView *me 	= self;
-	 _alertB.actionBlock 			= ^(id x){ [me showAlert:x]; 	};
-	  _modeB.actionBlock 			= ^(id x){ [me modePop]; 		};
-	_reloadB.actionBlock 			= ^(id x){ [me reloadURL:x]; 	};
+	 __block id me        = self;
+	 _alertB.actionBlock  = ^(id x){ [me showAlert:x]; };
+	  _modeB.actionBlock 	= ^(id x){ [me     modePop]; };
+	_reloadB.actionBlock 	= ^(id x){ [me reloadURL:x]; };
 	
 	_reloadB.image			= [NSImage imageNamed:@"NSRefreshTemplate"];
 	_urlBar.leftItems 	= @[_reloadB, _modeB];
 	_urlBar.rightItems 	= @[_alertB, _themeB];
 
-	NSRect splitFrame 			= self.bounds;
-	splitFrame.size.height    -= _urlBarHeight;
-	[_split 							= [NSSplitView.alloc initWithFrame:splitFrame] setVertical:NO];
-	_split.subviews 				= @[ _aceView = [ACEView.alloc init], _webView = [WebView.alloc init]];
-	_split.dividerStyle 			= NSSplitViewDividerStyleThick;
-	_split.autoresizingMask 	= 
+	NSRect splitFrame 			    = self.bounds;
+	splitFrame.size.height     -= _urlBarHeight;
+	[_split                     = [NSSplitView.alloc initWithFrame:splitFrame] setVertical:NO];
+	_split.subviews             = @[ _aceView = [ACEView.alloc init], _webView = [WebView.alloc init]];
+	_split.dividerStyle         = NSSplitViewDividerStyleThick;
+	_split.autoresizingMask     =
 	_webView.autoresizingMask 	= 
 	_aceView.autoresizingMask 	= NSViewWidthSizable|NSViewHeightSizable;
-	[_urlBar bind:@"addressString" toObject:_webView withKeyPath:@"mainFrameURL" options:nil];
-//	[_webView bind:@"mainFrameURL" toObject:_aceView withKeyPath:@"mainFrameURL" options:nil];
-//	_aceView.delegate 			= self; 
+//	[_urlBar bind:@"addressString" toObject:_webView withKeyPath:@"mainFrameURL" options:nil];
+	[_webView bind:@"mainFrameURL" toObject:_aceView withKeyPath:@"mainFrameURL" options:nil];
+//	_aceView.delegate 			= self;
 
 	[self addSubview:_split];
 //	_aceView.mode					= ACEModeHTML;
@@ -100,7 +100,7 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 																 encoding:NSUTF8StringEncoding error:nil];
 
 	//ACEModeNames.humanModeNames ACEThemeNames.humanThemeNames
-
+  return self;
 }
 
 - (void) textDidChange:(NSNotification *)notification {
@@ -108,14 +108,9 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 	NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void)reloadURL:(id)sender
-{
-	[[self.webView mainFrame] reload];
-}
+- (void) reloadURL:(id)x  { [_webView.mainFrame reload]; }
+- (void) showAlert:(id)x  {
 
-
-- (void)showAlert:(id)sender
-{
 	NSBeginAlertSheet (@"WebKit Objective-C Programming Guide",
 							 @"OK",
 							 nil,
@@ -127,11 +122,8 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 							 nil,
 							 @"As the user navigates from page to page in your embedded browser, you may want to display the current URL, load status, and error messages. For example, in a web browser application, you might want to display the current URL in a text field that the user can edit.", nil);
 }
-
-
-- (void)updateProgress
-{
-	self.urlBar.progressPhase = KFProgressPhaseDownloading;
+- (void) updateProgress   {
+	self.urlBar.progressPhase = KFProgDownloading;
 	self.progress += .005;
 	self.urlBar.progress = self.progress;
 	if (self.progress < 1.0)
@@ -140,56 +132,55 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 	}
 	else
 	{
-		self.urlBar.progressPhase = KFProgressPhaseNone;
+		self.urlBar.progressPhase = KFProgNone;
 	}
 }
 
+//@dynamic mainFrameURL;
+
+//+ (BOOL) resolveInstanceMethod:(SEL)s {
+//
+//  return s == @selector(mainFrameURL) ?: [super resolveInstanceMethod:s];
+//}
+//- (id) forwardingTargetForSelector:(SEL)s { NSLog(@"should i forward... %@", NSStringFromSelector(s));
+//
+//  return // [_webView respondsToSelector:s] ?
+//    self.webView;// : [super forwardingTargetForSelector:s];
+//}
+- (NSString*)mainFrameURL { return _webView.mainFrameURL; }
+- (void) setMainFrameURL:(NSString*)s { _webView.mainFrameURL = s; }
 
 #pragma mark - KFURLBarDelegate Methods
 
++ (BOOL) stringIsValidURL:(NSString*)s { static NSPredicate * p;
 
-- (void)urlBar:(KFURLBar *)urlBar didRequestURL:(NSURL *)url
-{
-	[[self.webView mainFrame] loadRequest:[[NSURLRequest alloc] initWithURL:url]];
-	self.urlBar.progressPhase = KFProgressPhasePending;
+	return [p = p ?: [NSPredicate predicateWithFormat:@"SELF MATCHES %@", // urlRegEx
+  @"(ftp|http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+"]
+                                 evaluateWithObject:s];
 }
 
+- (BOOL)urlBar:(KFURLBar*)bar isValidRequestStringValue:(NSString*)reqStr {
 
-- (BOOL)urlBar:(KFURLBar *)urlBar isValidRequestStringValue:(NSString *)requestString
-{
-	NSString *urlRegEx = @"(ftp|http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-	NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
-	return [urlTest evaluateWithObject:requestString];
+  return [self.class stringIsValidURL:reqStr];
 }
-
 
 #pragma mark - NSWindowDelegate Methods
 
+- (NSRect)window:(NSWindow*)w willPositionSheet:(NSWindow*)s usingRect:(NSRect)r {
 
-- (NSRect)window:(NSWindow *)window willPositionSheet:(NSWindow *)sheet usingRect:(NSRect)rect
-{
-	rect.origin.y -= NSHeight(self.urlBar.frame);
-	return rect;
+	r.origin.y -= NSHeight(_urlBar.frame);	return r;
 }
-
 
 #pragma mark WebKitProgressDelegate Methods
 
-
-- (void)webKitProgressDidChangeFinishedCount:(NSInteger)finishedCount ofTotalCount:(NSInteger)totalCount
+- (void) webKitProgressDidChangeFinishedCount:(NSInteger)finCt ofTotalCount:(NSInteger)totCt
 {
-	self.urlBar.progressPhase = KFProgressPhaseDownloading;
-	self.urlBar.progress = (float)finishedCount / (float)totalCount;
-	if (totalCount == finishedCount)
-	{
-		double delayInSeconds = 1.0;
-		__block ACEBrowserView *weakSelf = self;
-		dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-		dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
-							{
-								weakSelf.urlBar.progressPhase = KFProgressPhaseNone;
-							});
-	}
+	_urlBar.progressPhase = KFProgDownloading;
+	_urlBar.progress      = (CGFloat)finCt / (CGFloat)totCt;	if (totCt != finCt) return;
+
+  double delayInSeconds = 1.0;  __block KFURLBar *_bar = _urlBar;
+  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+  dispatch_after(popTime, dispatch_get_main_queue(), ^{ _bar.progressPhase = KFProgNone; });
 }
 - (NSPopover*) modePop {
 
@@ -281,3 +272,16 @@ typedef void(^NSControlActionBlock)(id sender); @interface NSControl (Block)
 // NSString *htmlFilePath = [[NSBundle bundleForClass:[self class]] pathForResource:@"HTML5" ofType:@"html"];   NSString *html = [NSString stringWithContentsOfFile:htmlFilePath encoding:NSUTF8StringEncoding error:nil];
 //    [aceView setString:[NSString stringWithContentsOfURL:[NSURL URLWithString:@"https://github.com/faceleg/ACEView"] encoding:NSUTF8StringEncoding
 //                                                   error:nil]];
+
+//#import "ACEModeNames.h"
+//#import "ACEThemeNames.h"
+//#import <objc/message.h>
+//#import <objc/runtime.h>
+//@interface NSControl (Block)
+//- (NSControlActionBlock) actionBlock;
+//- (void)setActionBlock:(NSControlActionBlock)ab;
+//
+//@end
+//- (void) showAlert:(id)x;
+//- (void) reloadURL:(id)x;
+//- (void) showPopoverAction:(id)sender;

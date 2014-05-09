@@ -1,12 +1,9 @@
 
 #import "ACEView.h"
 #import "ACERange.h"
-//#import "ACEStringFromBool.h"
-#import "NSString+EscapeForJavaScript.h"
-#import "NSInvocation+MainThread.h"
 
-@implementation  ACEMode																												@end
-@implementation  ACETheme																											@end
+@implementation ACEMode @end @implementation ACETheme @end
+
 @implementation  ACESetting
 + (instancetype) settingNamed:(NSString*)n jsFormat:(NSString*)fmt, ... {
 	id x = self.new; [(ACESetting*)x setName:n]; va_list args;	va_start(args, fmt);
@@ -15,32 +12,15 @@
 	return x;
 } @end
 
-static			     NSArray * allowedSelectorNamesForJavaScript;
-
-@interface ACEView()
+@interface ACEView() <NSTextFinderClient>
 @property NSTextFinder *textFinder;
-- (NSString *) stringByEvaluatingJavaScriptOnMainThreadFromString:(NSString *)script;
-- (void) executeScriptsWhenLoaded:(NSArray *)scripts;
-- (void) executeScriptWhenLoaded:(NSString *)script;
-- (void) resizeWebView;
-+ (NSArray*) allowedSelectorNamesForJavaScript;
-- (void) aceTextDidChange;
 @end
 
 @implementation ACEView
 
 - (NSString*)aceDirectory { return  [[NSBundle bundleForClass:self.class].resourcePath stringByAppendingPathComponent:@"src"]; }
 
-- (void) loadAce { 	[self addSubview:_webView = WebView.new]; _webView.frameLoadDelegate = self;
-
-	NSString *htmlPath = [[NSBundle bundleForClass:self.class] pathForResource:@"index" ofType:@"html"];
-	[_webView.mainFrame loadHTMLString: [[NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil]
-									stringByReplacingOccurrencesOfString:ACE_JAVASCRIPT_DIRECTORY withString:self.aceDirectory] baseURL:[NSBundle bundleForClass:self.class].bundleURL];
-	[self setFont:nil];
-	[self resizeWebView];
-}
-
-- (id) superViewOfView:(id)v ofClass:(Class)k { id x; if (!(x = [v superview])) return nil; else if ([x isKindOfClass:k]) return x; else return  [self superViewOfView:x ofClass:k]; }
+-   (id) superViewOfView:(id)v ofClass:(Class)k { id x; if (!(x = [v superview])) return nil; else if ([x isKindOfClass:k]) return x; else return  [self superViewOfView:x ofClass:k]; }
 
 - (void) viewDidMoveToWindow {
 
@@ -49,61 +29,86 @@ static			     NSArray * allowedSelectorNamesForJavaScript;
 	_textFinder										= NSTextFinder.new;
 	_textFinder.client						=	self;
 	_textFinder.findBarContainer	= self;
-	[self loadAce];
+
+  [self addSubview:_webView = WebView.new]; /* loadACE */
+  [_webView setFrameLoadDelegate:self];
+  [_webView.mainFrame loadHTMLString:
+    [[NSString stringWithContentsOfFile:[ACE_BUNDLE pathForResource:@"index" ofType:@"html"]
+                               encoding:NSUTF8StringEncoding error:nil]
+   stringByReplacingOccurrencesOfString:ACE_JAVASCRIPT_DIRECTORY
+                             withString:self.aceDirectory]
+                                baseURL:[NSBundle bundleForClass:self.class].bundleURL];
+	[self setFont:nil];
+	[self resizeWebView]; /* loadACE END */
+
+
 	ACEBrowserView *x = [self superViewOfView:self ofClass:ACEBrowserView.class];
-	if (x) {	NSLog(@"found %@", x);
-		[x.webView.mainFrame loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://google.com" ]]];
+	if (x) {
+    NSLog(@"found %@", x); x.mainFrameURL = @"http://google.com";
 		x.split.vertical = YES;
 	}
 }
-+ (BOOL) isSelectorExcludedFromWebScript:(SEL)aSelector {
-	return ![ACEView.allowedSelectorNamesForJavaScript containsObject:NSStringFromSelector(aSelector)];
-}
 
 #pragma mark - NSView overrides
-- (void) drawRect:						(NSRect)dirtyRect { [self resizeWebView]; [super drawRect:dirtyRect]; }
-- (void) resizeSubviewsWithOldSize:	(NSSize)oldSize 	{ [self resizeWebView]; 									 }
+
+- (void)                  drawRect:(NSRect)r { [self resizeWebView]; [super drawRect:r]; }
+- (void) resizeSubviewsWithOldSize:(NSSize)x { [self resizeWebView]; }
 
 #pragma mark - WebView delegate methods
-- (void) webView:(WebView*)w didFinishLoadForFrame:(WebFrame *)f{ [_webView.windowScriptObject setValue:self forKey:@"ACEView"]; }
+
+- (void) webView:(WebView*)w didFinishLoadForFrame:(WebFrame *)f  { [_webView.windowScriptObject setValue:self forKey:@"ACEView"]; }
++ (BOOL) isSelectorExcludedFromWebScript:(SEL)s {
+
+static NSArray *allowed; 	return ![allowed = allowed ?: @[@"showFindInterface", @"showReplaceInterface", @"aceTextDidChange"]
+                                        containsObject:NSStringFromSelector(s)];
+}
 
 #pragma mark - NSTextFinderClient methods
+
 - (void) performTextFinderAction:(id)x { [_textFinder performAction:[x tag]]; }
 
-- (void) scrollRangeToVisible:(NSRange)range { _firstSelectedRange = range;
+- (void)     scrollRangeToVisible:(NSRange)r                          { _firstSelectedRange = r;
 	
 	[self executeScriptWhenLoaded:
 	 [NSString stringWithFormat:	@"editor.session.selection.clearSelection();"
 	  @"editor.session.selection.setRange(new Range(%@));"
-	  @"editor.centerSelection()", ACEStringFromRangeAndString(range, self.stringValue)]];
+	  @"editor.centerSelection()", ACEStringFromRangeAndString(r, self.stringValue)]];
 }
-- (void) replaceCharactersInRange:(NSRange)range withString:(NSString *)string {
+- (void) replaceCharactersInRange:(NSRange)r withString:(NSString*)s  {
 	
-	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.session.replace(new Range(%@), \"%@\");",
-											 ACEStringFromRangeAndString(range, self.stringValue), string.stringByEscapingForJavaScript]];
+	[self executeScriptWhenLoaded:
+    [NSString stringWithFormat:@"editor.session.replace(new Range(%@), \"%@\");",
+											 ACEStringFromRangeAndString(r, self.stringValue), s.stringByEscapingForJavaScript]];
 }
 - (BOOL) isEditable { return YES; }
 
 #pragma mark - Private
-- (NSString *) stringByEvaluatingJavaScriptOnMainThreadFromString:(NSString *)script {	NSString *contentString;
-	
-	SEL strByEvalJSFromStr 		= @selector(stringByEvaluatingJavaScriptFromString:);
-	NSInvocation *invocation 	= [NSInvocation invocationWithMethodSignature: [_webView.class instanceMethodSignatureForSelector:strByEvalJSFromStr]];
-	invocation.selector 			= strByEvalJSFromStr;
-	invocation.target 			= _webView;
-	[invocation setArgument:&script atIndex:2];
+- (NSString*) stringByEvaluatingJavaScriptOnMainThreadFromString:(NSString*)s {
+
+	NSString *contentString;
+	SEL sByEJSFS              = @selector(stringByEvaluatingJavaScriptFromString:);
+  NSMethodSignature *sig    = [_webView.class instanceMethodSignatureForSelector:sByEJSFS];
+	NSInvocation *invocation 	= [NSInvocation invocationWithMethodSignature:sig];
+	invocation.selector 			= sByEJSFS;
+	invocation.target         = _webView;
+	[invocation setArgument:&s atIndex:2];
 	[invocation invokeOnMainThread];
-	[invocation getReturnValue:&contentString];
-	return contentString;
+	[invocation getReturnValue:&contentString];	return contentString;
 }
-- (void) executeScriptsWhenLoaded:(NSArray *)scripts {
+- (void) executeScriptsWhenLoaded:(NSArray*)jss       {
 
-	if (_webView.isLoading) return [self performSelector:@selector(executeScriptsWhenLoaded:) withObject:scripts afterDelay:.2];
-	[scripts enumerateObjectsUsingBlock:^(id script, NSUInteger index, BOOL *stop) { [_webView stringByEvaluatingJavaScriptFromString:script]; }];
+	!_webView.isLoading ? [jss enumerateObjectsUsingBlock:^(id s, NSUInteger x, BOOL *p) {
+    [_webView stringByEvaluatingJavaScriptFromString:s];
+  }] : [self performSelector:_cmd withObject:jss afterDelay:.2];
 }
-- (void) executeScriptWhenLoaded:(NSString *)script { 	[self executeScriptsWhenLoaded:@[script]]; }
+- (void)  executeScriptWhenLoaded:(NSString*)js       { 	[self executeScriptsWhenLoaded:@[js]]; }
+- (void)  executeScriptWithFormat:(NSString*)fmt,...  { va_list va; va_start(va,fmt);
 
-- (void) resizeWebView { 	NSRect bounds = self.bounds;
+  NSString *str = [NSString.alloc initWithFormat:fmt arguments:va];       va_end(va);
+  [self executeScriptWhenLoaded:str];
+}
+
+- (void) resizeWebView        { 	NSRect bounds = self.bounds;
 
 	id<NSTextFinderBarContainer> findBarContainer = _textFinder.findBarContainer;
 	if (findBarContainer.isFindBarVisible) {
@@ -113,38 +118,38 @@ static			     NSArray * allowedSelectorNamesForJavaScript;
 	}
 	[_webView.animator setFrame:NSMakeRect(bounds.origin.x + 1, bounds.origin.y + 1, bounds.size.width - 2, bounds.size.height - 2)];
 }
-
-- (void) showFindInterface 	{ [_textFinder performAction:NSTextFinderActionShowFindInterface]; 		[self resizeWebView]; }
+- (void) showFindInterface    { [_textFinder performAction:NSTextFinderActionShowFindInterface]; 		[self resizeWebView]; }
 - (void) showReplaceInterface { [_textFinder performAction:NSTextFinderActionShowReplaceInterface];	[self resizeWebView]; }
+- (void) aceTextDidChange     {
 
-+ (NSArray *) allowedSelectorNamesForJavaScript {
-	
-	allowedSelectorNamesForJavaScript  = allowedSelectorNamesForJavaScript  ?: @[ @"showFindInterface", @"showReplaceInterface", @"aceTextDidChange" ];
-	return allowedSelectorNamesForJavaScript;// retain];
-}
-
-- (void) aceTextDidChange { NSNotification *note;
-	[NSNotificationCenter.defaultCenter postNotification:note = [NSNotification notificationWithName:ACETextDidEndEditingNotification object:self]];
+	[ACENOTCENTER postNotification:
+    [NSNotification notificationWithName:ACETextDidEndEditingNotification object:self]];
 }
 
 #pragma mark - Public
-- (NSString *) stringValue { return [self stringByEvaluatingJavaScriptOnMainThreadFromString:@"editor.getValue();"]; }
-- (void) setStringValue:(NSString*)stringValue { 
+- (NSString*) stringValue {
 
-	[self executeScriptsWhenLoaded:@[@"reportChanges = false;",
-												[NSString stringWithFormat:@"editor.setValue(\"%@\");", [stringValue stringByEscapingForJavaScript]],
-												@"editor.clearSelection();",
-												@"editor.moveCursorTo(0, 0);",
-												@"reportChanges = true;",
-												@"ACEView.aceTextDidChange();"]];
+  return [self stringByEvaluatingJavaScriptOnMainThreadFromString:@"editor.getValue();"];
 }
-@synthesize themes = _themes, modes = _modes, webView = _webView;
+-      (void) setStringValue:(NSString*)stringValue {
 
-- (NSArrayController*) modes	{ return _modes  ?: ^{ _modes = NSArrayController.new;
+	[self executeScriptsWhenLoaded:@[
+
+  @"reportChanges = false;",
+  [NSString stringWithFormat:@"editor.setValue(\"%@\");",
+            [stringValue stringByEscapingForJavaScript]],
+  @"editor.clearSelection();",
+  @"editor.moveCursorTo(0, 0);",
+  @"reportChanges = true;",
+  @"ACEView.aceTextDidChange();"]];
+}
+@synthesize themes = _themes, modes = _modes;
+
+- (NSArrayController*) modes	{ return _modes = _modes ?: ({ _modes = NSArrayController.new;
 
 	NSString *cmd, *file, *parse;
- 	cmd = @"Object.keys(supportedModes);",
-	file = [self.aceDirectory stringByAppendingPathComponent:@"ext-modelist.js"],
+ 	cmd = @"Object.keys(supportedModes);";
+	file = [self.aceDirectory stringByAppendingPathComponent:@"ext-modelist.js"];
 	parse =  [[NSString stringWithContentsOfFile:file encoding:NSUTF8StringEncoding error:nil]
 							 stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
 									  
@@ -153,6 +158,7 @@ static			     NSArray * allowedSelectorNamesForJavaScript;
 	NSRange closingBrace = [parse rangeOfString:@"};"];
 	parse = [parse substringWithRange:NSMakeRange(0,closingBrace.location + 2)];
 	NSArray *humanReadables = [[cmd evaluateStringWithStringOrFile:parse] componentsSeparatedByString:@","];
+
 	NSString*(^getShorty)(NSString *) = ^NSString*(NSString *key) {
 
 		NSString *res = [[NSString stringWithFormat:@"supportedModes.%@;", key] evaluateStringWithStringOrFile:parse];
@@ -161,14 +167,14 @@ static			     NSArray * allowedSelectorNamesForJavaScript;
 	};
 
 	[humanReadables enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-		ACEMode *m = ACEMode.new;
-		m.name = obj;
-		m.js = [NSString stringWithFormat:@"editor.getSession().setMode('ace/mode/%@');", getShorty(obj)];
-		[_modes addObject:m];
-	}];
-	[_modes addObserver:self forKeyPath:@"selectionIndex" options:nil context:NULL];
-	return _modes;
-}();	}
+    [_modes addObject:
+        [ACEMode settingNamed:obj
+                     jsFormat:@"editor.getSession().setMode('ace/mode/%@');", getShorty(obj)]];
+  }];
+  [_modes addObserver:self forKeyPath:@"selectionIndex" options:nil context:NULL];
+
+  _modes; });
+}
 - (NSArrayController*) themes { return _themes ?: ^{ _themes = NSArrayController.new;
 
 		NSString *cmd 	= @"themes;", 
@@ -205,13 +211,6 @@ static			     NSArray * allowedSelectorNamesForJavaScript;
 - (void) setFont:(NSString*)name {
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"document.getElementById('editor').style.fontFamily = 'UbuntuMono-Bold';"]];
 }
-//- (void) setMode:(ACEMode)mode {  SETIT(mode);
-//	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.getSession().setMode(\"ace/mode/%@\");", [ACEModeNames nameForMode:mode]]];
-//}
-//- (void) setTheme:(ACETheme)theme { SETIT(theme);
-//	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setTheme(\"ace/theme/%@\");", [ACEThemeNames nameForTheme:theme]]];
-//}
-
 - (void) setWrappingBehavioursEnabled:(BOOL)wrap { _wrappingBehavioursEnabled = wrap;
 	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setWrapBehavioursEnabled(%@);", ACEStringFromBool(wrap)]];
 }
@@ -301,3 +300,16 @@ static			     NSArray * allowedSelectorNamesForJavaScript;
 //																						usingBlock:^(NSNotification *note) {
 //																							[_webView setNeedsDisplay:YES];
 //																						}];
+//- (void) setMode:(ACEMode)mode {  SETIT(mode);
+//	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.getSession().setMode(\"ace/mode/%@\");", [ACEModeNames nameForMode:mode]]];
+//}
+//- (void) setTheme:(ACETheme)theme { SETIT(theme);
+//	[self executeScriptWhenLoaded:[NSString stringWithFormat:@"editor.setTheme(\"ace/theme/%@\");", [ACEThemeNames nameForTheme:theme]]];
+//}
+//- (NSString *) stringByEvaluatingJavaScriptOnMainThreadFromString:(NSString *)script;
+//- (void) executeScriptsWhenLoaded:(NSArray *)scripts;
+//- (void) executeScriptWhenLoaded:(NSString *)script;
+//- (void) resizeWebView;
+//+ (NSArray*) allowedSelectorNamesForJavaScript;
+//- (void) aceTextDidChange;
+//#import "ACEStringFromBool.h"

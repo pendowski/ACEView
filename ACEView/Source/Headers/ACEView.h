@@ -1,55 +1,62 @@
 
-#import <WebKit/WebKit.h>
+@import WebKit;
+#import <ACEView/NSString+JS.h>
+#import <ACEView/NSInvocation+MainThread.h>
+//#import <ACEView/ACELanguageDetector.h>
 
-@interface ACESetting : NSObject + (instancetype) settingNamed:(NSString*)n jsFormat:(NSString*)fmt, ...;
-@property    NSString * name, *js;	@end
+@interface ACESetting : NSObject  + (instancetype) settingNamed:(NSString*)n jsFormat:(NSString*)fmt, ...;
+@property    NSString * name, *js;  @end
+
 @interface    ACEMode : ACESetting 	@end
 @interface   ACETheme : ACESetting 	@end
 
+@interface ACEView : NSScrollView
 
-@interface ACEView : NSScrollView <NSTextFinderClient> 
+@property	 (readonly)				    WebView * webView;
+@property  (readonly) NSArrayController * modes, *themes;
+@property  (readonly)          NSString * aceDirectory;
+@property  (readonly)		        NSRange   firstSelectedRange;
 
+
+@property (nonatomic) 	 ACEMode * mode;
+@property (nonatomic) 	ACETheme * theme;
+@property (nonatomic)	  NSString * stringValue,
+												 				 * documentPath;
+@property (nonatomic)		 NSRange   wrapLimitRange;
+@property (nonatomic) NSUInteger   scrollSpeed,
+																	 printMarginColumn,
+																	 fontSize;
+@property (nonatomic)				BOOL   wrappingBehavioursEnabled,
+																	 useSoftWrap,
+																	 showInvisibles,
+																	 showFoldWidgets,
+																	 fadeFoldWidgets,
+																	 highlightActiveLine,
+																	 highlightGutterLine,
+																	 highlightSelectedWord,
+																	 animatedScroll,
+																	 displayIndentGuides,
+																	 showPrintMargin;
+
+typedef    void(^TextChanged)(ACEView* ace,NSString *line);
+@property (copy) TextChanged textChanged;
 
 - (void) showFindInterface;
 - (void) showReplaceInterface;
 - (void) gotoLine:(NSInteger)lineNumber column:(NSInteger)columnNumber animated:(BOOL)animate;
 
-@property  (readonly) NSArrayController *modes;
-@property  (readonly) NSArrayController *themes;
-
-@property	(readonly)					  WebView * webView;
-@property (nonatomic)					 NSString * stringValue,
-																				* documentPath;
-@property  (readonly)			     NSString * mode,
-																				* aceDirectory;
-
-@property (nonatomic)		 NSRange  wrapLimitRange;
-@property  (readonly)		 NSRange   firstSelectedRange;
-@property (nonatomic) NSUInteger  scrollSpeed,
-																	printMarginColumn,
-																	fontSize;
-@property (nonatomic)				BOOL  wrappingBehavioursEnabled,
-																	useSoftWrap,
-																	showInvisibles,
-																	showFoldWidgets,
-																	fadeFoldWidgets,
-																	highlightActiveLine,
-																	highlightGutterLine,
-																	highlightSelectedWord,
-																	animatedScroll,
-																	displayIndentGuides,
-																	showPrintMargin;
-
-typedef void(^TextChanged)(ACEView* ace,NSString *line);
-@property (copy) TextChanged textChanged;
-
 @end
 
 
+#import <ACEView/ACEBrowserView.h>
+
 #define SETONLYPROPERTY(_KIND_,_NAME_) @property (nonatomic) _KIND_ _NAME_; - (_KIND_)_NAME_ UNAVAILABLE_ATTRIBUTE
+
 #define ACE_JAVASCRIPT_DIRECTORY @"___ACE_VIEW_JAVASCRIPT_DIRECTORY___"
 #define ACETextDidEndEditingNotification @"ACETextDidEndEditingNotification"
-#import <ACEView/ACEBrowserView.h>
+#define ACE_BUNDLE [NSBundle bundleForClass:ACEView.class]
+#define ACENOTCENTER NSNotificationCenter.defaultCenter
+
 
 /** Turn wrapping behaviour on or off.
  Specifies whether to use wrapping behaviors or not, i.e. automatically wrapping the selection with characters such as brackets when such a character is typed in.
@@ -139,9 +146,7 @@ typedef void(^TextChanged)(ACEView* ace,NSString *line);
 /** Posts a notification that the text has changed and forwards this message to the delegate if it responds.
  @param notification The ACETextDidEndEditingNotification notification that is posted to the default notification center.
  */
-//- (void) textDidChange:(NSNotification *)notification;
-//@end
-//{
+//- (void) textDidChange:(NSNotification *)notification;@end {
 //	NSTextFinder *_textFinder;
 //	CGColorRef _borderColor;
 //	WebView *_webView;

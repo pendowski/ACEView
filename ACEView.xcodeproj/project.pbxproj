@@ -29,6 +29,8 @@
 		36F169ED16B9346C00E8965C /* ACEView_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F169EC16B9346C00E8965C /* ACEView_Tests.m */; };
 		36F169F816B9374200E8965C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F169F616B9374200E8965C /* MainMenu.xib */; };
 		36F169F916B9375D00E8965C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36F169F616B9374200E8965C /* MainMenu.xib */; };
+		7B4A2DA7191C351B00E20A3A /* KFWebKitProgressController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B4A2DA5191C351B00E20A3A /* KFWebKitProgressController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7B4A2DA8191C351B00E20A3A /* KFURLBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B4A2DA6191C351B00E20A3A /* KFURLBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B4D35361819A9C500664C4A /* src in Copy ACE JavaScript */ = {isa = PBXBuildFile; fileRef = 7B4D35351819A9C400664C4A /* src */; };
 		7B644D0E18164AEA0036D205 /* ACEBrowserView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B644D0C18164AEA0036D205 /* ACEBrowserView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7B6996711819605C00CAD9E2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B6996701819605C00CAD9E2 /* Foundation.framework */; };
@@ -41,10 +43,10 @@
 		7BF6DBA7181C5D64007B9A63 /* ACELanguageDetector.h in Headers */ = {isa = PBXBuildFile; fileRef = 7BF6DBA5181C5D64007B9A63 /* ACELanguageDetector.h */; };
 		7BF6DBA8181C5D64007B9A63 /* ACELanguageDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF6DBA6181C5D64007B9A63 /* ACELanguageDetector.m */; };
 		7C08C07C1672ED23000D4A97 /* NSInvocation+MainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */; };
-		7C08C07E1672ED30000D4A97 /* NSInvocation+MainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */; };
+		7C08C07E1672ED30000D4A97 /* NSInvocation+MainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C86C84E166F184D00AE3A57 /* ACERange.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C86C84D166F184C00AE3A57 /* ACERange.h */; };
-		7C86C852166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C86C850166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m */; };
-		7C86C854166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C86C853166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h */; };
+		7C86C852166F4A0E00AE3A57 /* NSString+JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C86C850166F4A0E00AE3A57 /* NSString+JS.m */; };
+		7C86C854166F4A2000AE3A57 /* NSString+JS.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C86C853166F4A2000AE3A57 /* NSString+JS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C8A729015EA0769007E5EB8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8A728F15EA0769007E5EB8 /* Cocoa.framework */; };
 		7C8A72E215EA0F0E007E5EB8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C8A728F15EA0769007E5EB8 /* Cocoa.framework */; };
 		7C8A72EA15EA0F0E007E5EB8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C8A72E915EA0F0E007E5EB8 /* main.m */; };
@@ -128,6 +130,8 @@
 		36F169EC16B9346C00E8965C /* ACEView_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACEView_Tests.m; sourceTree = "<group>"; };
 		36F169EE16B9346C00E8965C /* ACEView Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACEView Tests-Prefix.pch"; sourceTree = "<group>"; };
 		36F169F716B9374200E8965C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		7B4A2DA5191C351B00E20A3A /* KFWebKitProgressController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFWebKitProgressController.h; path = KFURLBar/KFURLBar/KFWebKitProgressController.h; sourceTree = "<group>"; };
+		7B4A2DA6191C351B00E20A3A /* KFURLBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KFURLBar.h; path = KFURLBar/KFURLBar/Sources/KFURLBar.h; sourceTree = "<group>"; };
 		7B4D35351819A9C400664C4A /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; name = src; path = ace/build/src; sourceTree = "<group>"; };
 		7B644D0C18164AEA0036D205 /* ACEBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACEBrowserView.h; path = ACEView/Source/ACEBrowserView.h; sourceTree = "<group>"; };
 		7B644D0D18164AEA0036D205 /* ACEBrowserView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ACEBrowserView.m; path = ACEView/Source/ACEBrowserView.m; sourceTree = "<group>"; };
@@ -142,8 +146,8 @@
 		7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSInvocation+MainThread.m"; path = "ACEView/Source/Categories/NSInvocation+MainThread.m"; sourceTree = "<group>"; };
 		7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSInvocation+MainThread.h"; path = "ACEView/Source/Categories/Headers/NSInvocation+MainThread.h"; sourceTree = "<group>"; };
 		7C86C84D166F184C00AE3A57 /* ACERange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ACERange.h; path = ACEView/Source/Utilities/Headers/ACERange.h; sourceTree = "<group>"; };
-		7C86C850166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+EscapeForJavaScript.m"; path = "ACEView/Source/Categories/NSString+EscapeForJavaScript.m"; sourceTree = "<group>"; };
-		7C86C853166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+EscapeForJavaScript.h"; path = "ACEView/Source/Categories/Headers/NSString+EscapeForJavaScript.h"; sourceTree = "<group>"; };
+		7C86C850166F4A0E00AE3A57 /* NSString+JS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+JS.m"; path = "ACEView/Source/Categories/NSString+JS.m"; sourceTree = "<group>"; };
+		7C86C853166F4A2000AE3A57 /* NSString+JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+JS.h"; path = "ACEView/Source/Categories/Headers/NSString+JS.h"; sourceTree = "<group>"; };
 		7C8A728C15EA0769007E5EB8 /* ACEView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ACEView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C8A728F15EA0769007E5EB8 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7C8A729215EA0769007E5EB8 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -233,7 +237,7 @@
 		7BB2B662181A47190078A9C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7BB2B667181A47190078A9C1 /* KFURLBar.app */,
+				7BB2B667181A47190078A9C1 /* KFURLBarDemo.app */,
 				7BB2B669181A47190078A9C1 /* libKFURLBar.a */,
 			);
 			name = Products;
@@ -242,6 +246,8 @@
 		7C8A728015EA0769007E5EB8 = {
 			isa = PBXGroup;
 			children = (
+				7B4A2DA5191C351B00E20A3A /* KFWebKitProgressController.h */,
+				7B4A2DA6191C351B00E20A3A /* KFURLBar.h */,
 				7BB2B661181A47190078A9C1 /* KFURLBar.xcodeproj */,
 				7C8A72E315EA0F0E007E5EB8 /* ACE View Example */,
 				7B644D0C18164AEA0036D205 /* ACEBrowserView.h */,
@@ -257,8 +263,8 @@
 				7C9B5F12166AEB9700A24CB7 /* index.html */,
 				7C08C07D1672ED30000D4A97 /* NSInvocation+MainThread.h */,
 				7C08C07B1672ED23000D4A97 /* NSInvocation+MainThread.m */,
-				7C86C853166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h */,
-				7C86C850166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m */,
+				7C86C853166F4A2000AE3A57 /* NSString+JS.h */,
+				7C86C850166F4A0E00AE3A57 /* NSString+JS.m */,
 				7C8A728D15EA0769007E5EB8 /* Products */,
 				7B4D35351819A9C400664C4A /* src */,
 				7C8A729615EA0769007E5EB8 /* Supporting Files */,
@@ -345,10 +351,12 @@
 			files = (
 				7C9B66C2166AF4C600A24CB7 /* ACEView.h in Headers */,
 				7C9B66C5166AF4E900A24CB7 /* ACELogger.h in Headers */,
+				7B4A2DA7191C351B00E20A3A /* KFWebKitProgressController.h in Headers */,
 				7C86C84E166F184D00AE3A57 /* ACERange.h in Headers */,
 				7BF6DBA7181C5D64007B9A63 /* ACELanguageDetector.h in Headers */,
-				7C86C854166F4A2000AE3A57 /* NSString+EscapeForJavaScript.h in Headers */,
+				7C86C854166F4A2000AE3A57 /* NSString+JS.h in Headers */,
 				7B644D0E18164AEA0036D205 /* ACEBrowserView.h in Headers */,
+				7B4A2DA8191C351B00E20A3A /* KFURLBar.h in Headers */,
 				7C08C07E1672ED30000D4A97 /* NSInvocation+MainThread.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,11 +403,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C8A72A115EA0769007E5EB8 /* Build configuration list for PBXNativeTarget "ACEView" */;
 			buildPhases = (
-				7B6996611819547700CAD9E2 /* ShellScript */,
 				7C8A728715EA0769007E5EB8 /* Sources */,
 				7C8A728815EA0769007E5EB8 /* Frameworks */,
 				7C8A728915EA0769007E5EB8 /* Headers */,
 				7C9B66B0166AF19A00A24CB7 /* Copy ACE JavaScript */,
+				7B6996611819547700CAD9E2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -465,10 +473,9 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		7BB2B667181A47190078A9C1 /* KFURLBar.app */ = {
+		7BB2B667181A47190078A9C1 /* KFURLBarDemo.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
-			name = KFURLBar.app;
 			path = KFURLBarDemo.app;
 			remoteRef = 7BB2B666181A47190078A9C1 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
@@ -528,7 +535,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd \"${BUILT_PRODUCTS_DIR}/include\"\nfor D in `find . -type d -d 1 | xargs basename`; do\n\tlogger \"$D\"\n    cmnd=\"sudo rsync -lKr --del $D ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/A/Headers/\"\n    eval $cmnd\n    ret_code=$? && if [ $ret_code -ne 0 ];then exit $ret_code; fi\ndone";
+			shellScript = "#cd \"${BUILT_PRODUCTS_DIR}/include\"\n#for D in `find . -type d -d 1 | xargs basename`; do\n#\tlogger \"$D\"\n#    cmnd=\"sudo rsync -lKr --del $D ${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Versions/A/Headers/\"\n#    eval $cmnd\n#    ret_code=$? && if [ $ret_code -ne 0 ];then exit $ret_code; fi\n#done\nPRODUCT=\"${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\"\n\nsudo ln -sF \"$PRODUCT\" \"/Library/Frameworks/\"\nsudo ln -sF \"$PRODUCT\" \"${SDKROOT}/System/Library/Frameworks/\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -554,7 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C9B66BE166AF49F00A24CB7 /* ACEView.m in Sources */,
-				7C86C852166F4A0E00AE3A57 /* NSString+EscapeForJavaScript.m in Sources */,
+				7C86C852166F4A0E00AE3A57 /* NSString+JS.m in Sources */,
 				7B8C888B181A124400A43EE4 /* ACEBrowserView.m in Sources */,
 				7C08C07C1672ED23000D4A97 /* NSInvocation+MainThread.m in Sources */,
 				7BF6DBA8181C5D64007B9A63 /* ACELanguageDetector.m in Sources */,
@@ -775,6 +782,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_MODULES_AUTOLINK = NO;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -785,6 +793,10 @@
 				GCC_PREFIX_HEADER = "ACEView/ACEView-Prefix.pch";
 				INFOPLIST_FILE = "ACEView/ACEView-Info.plist";
 				INSTALL_PATH = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					WebKit,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				VALID_ARCHS = "x86_64 i386";
@@ -796,6 +808,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_MODULES_AUTOLINK = NO;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -806,6 +819,10 @@
 				GCC_PREFIX_HEADER = "ACEView/ACEView-Prefix.pch";
 				INFOPLIST_FILE = "ACEView/ACEView-Info.plist";
 				INSTALL_PATH = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					WebKit,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				VALID_ARCHS = "x86_64 i386";

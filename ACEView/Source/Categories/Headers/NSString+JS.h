@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (EscapeForJavaScript)
+@interface NSString (AtoZJSFierceness)
 
-- (NSString *) stringByEscapingForJavaScript;
+@property (readonly) NSString * stringByEscapingForJavaScript;
+
 - (NSString*) evaluateStringWithStringOrFile:(id)script;
-- (NSString*)stringByPaddingTheLeftToLength:(NSUInteger)newLength;
+- (NSString*) stringByPaddingTheLeftToLength:(NSUInteger)newLength;
 @end
